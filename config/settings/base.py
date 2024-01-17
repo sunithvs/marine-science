@@ -59,7 +59,6 @@ INSTALLED_APPS = [
 
 # Third-party apps
 THIRD_PARTY_APPS = [
-    "rest_framework",
     'drf_yasg',
     'ckeditor',
 ]

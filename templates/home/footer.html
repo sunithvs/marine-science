@@ -1,0 +1,64 @@
+<!--==========================
+    Footer
+  ============================-->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-info">
+                    <h3><a href="/">Department of Marine Science</a></h3>
+                    <p>School of Marine Science, a unique institution of its kind in the country was established in 1938
+                        as Department of Marine Biology and Fisheries under the erstwhile Travancore University to cater
+                        Marine Science education and research at national levels. The school is presently part of Cochin
+                        University of Science and Technology.</p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="fa fa-angle-right"></i> <a href="/">Home</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/#about">About us</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/#notice">Notices</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/#departments">Departments</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/#gallery">Gallery</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-8 footer-links">
+                    <h4>Departments</h4>
+                    <ul>
+                        {% for dep in departments %}
+                            <li><i class="fa fa-angle-right"></i> <a href="#">{{ dep.name }}</a></li>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>Director <br>
+                        School of Marine Sciences <br>
+                        Cochin University of Science and Technology<br>
+                        Lakeside Campus<br>
+                        Fine Arts Avenue -
+                        Cochin - 682 016
+                    </p>
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong> School of Marine Sciences,CUSAT </strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <a href="https://bootstrapmade.com/"></a>
+        </div>
+    </div>
+</footer><!-- #footer -->

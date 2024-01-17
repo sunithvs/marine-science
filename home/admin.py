@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Notice, Gallery
+
+admin.site.register(Notice)
+admin.site.register(Gallery)
