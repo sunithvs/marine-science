@@ -30,7 +30,8 @@
                     <h4>Departments</h4>
                     <ul>
                         {% for dep in departments %}
-                            <li><i class="fa fa-angle-right"></i> <a href="#">{{ dep.name }}</a></li>
+                            <li><i class="fa fa-angle-right"></i> <a target="_blank"
+                                                                     href="{{ dep.website }}">{{ dep.name }}</a></li>
 
                         {% endfor %}
                     </ul>
@@ -38,14 +39,13 @@
 
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h4>Contact Us</h4>
-                    <p>Director <br>
+                    <p>Prof. A. A. Mohamed Hatha <br>Director <br>
                         School of Marine Sciences <br>
                         Cochin University of Science and Technology<br>
                         Lakeside Campus<br>
                         Fine Arts Avenue -
                         Cochin - 682 016
                     </p>
-
                     
                 </div>
 
