@@ -13,8 +13,11 @@ COPY requirements.txt /code/
 COPY . /code/
 RUN pip install --upgrade setuptools
 RUN pip install --upgrade pip
+RUN python -m pip install --user virtualenv
+
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
 
 
 # Expose the port on which Gunicorn will run
