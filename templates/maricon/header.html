@@ -1,36 +1,29 @@
-<!--==========================
-    Header
-  ============================-->
 <header id="header">
     <div class="container">
-
         <div id="logo" class="pull-left">
-            <h1><a href="#main">MARIC<span>o</span>n&nbsp;2<span>0</span>23</a></h1>
-            <!--        <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" title=""></a>-->
+            <h1><a href="#main">MARIC<span>o</span>n&nbsp;2<span>0</span>24</a></h1>
         </div>
         <nav id="nav-menu-container" class="topnav">
             <div class="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="background.html">Background</a>
-                <a href="#speakers">Conference</a>
-                <a>
+                <a href="/maricon/">Home</a>
+                <a href="/maricon/#background">Background</a>
+                <a href="/maricon/#speakers">Speakers</a>
+                <a href="/maricon/#schedule">Schedule</a>
+                <a href="/maricon/#venue">Venue</a>
+                <a href="/maricon/#sponsors">Sponsors</a>
+                <a href="/maricon/committee/">
                     <div class="dropdown">
                         <button class="dropbtn">Committee<i style="margin-left: 3px;" class="fa fa-angle-down"></i></button>
                         <div class="dropdown-content">
-                            <a href="#">Advisory</a>
-                            <a href="#">Scientific Program</a>
-                            <a href="#">Organising</a>
+                            {% for committee in committees %}
+                                <a href="/maricon/committee/#{{ forloop.counter }}">{{ committee.name }}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </a>
-                <a href="#venue">Accepted Abstracts</a>
-                <a href="#hotels">Contact</a>
-                <a href="feedback.html">Feedback</a>
-                <a href="#sponsors">Login</a>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                    <i class="fa fa-bars"></i>
+                <a href="/maricon/#contact">Contact</a>
                 </a>
             </div>
-        </nav><!-- #nav-menu-container -->
+        </nav>
     </div>
-</header><!-- #header -->
+</header>

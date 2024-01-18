@@ -1,6 +1,3 @@
-<!--==========================
-    Footer
-  ============================-->
 <footer id="footer">
     <div class="footer-top">
         <div class="container">
@@ -8,48 +5,45 @@
 
                 <div class="col-lg-3 col-md-6 footer-info">
                     <h1><a href="#main">MARICON</a></h1>
-                    <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
+                    <p>The school of Marine Sciences has now completed 80 years of glorious existence and to commemorate
+                        this occasion it has been decided to organize the first International Conference on Frontiers in
+                        Marine Sciences (MARICON’19) and MARICON’23 is the second one in the genesis of this seminar.
+                    </p>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/">Home</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#background">Background</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#speakers">Speakers</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#schedule">Schedule</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#venue">Venue</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#sponsors">Sponsors</a></li>
+                        <li><i class="fa fa-angle-right"></i> <a href="/maricon/#contact">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Committees</h4>
                     <ul>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+                        {% for committee in committees %}
+                            <li><i class="fa fa-angle-right"></i> <a
+                                    href="/maricon/committee/#{{ forloop.counter }}">{{ committee }}</a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-contact">
                     <h4>Contact Us</h4>
-                    <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br>
-                        <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
+                    <p>Director <br>
+                        School of Marine Sciences <br>
+                        Cochin University of Science and Technology<br>
+                        Lakeside Campus<br>
+                        Fine Arts Avenue -
+                        Cochin - 682 016
                     </p>
-
-                    <div class="social-links">
-                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                        <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                    </div>
 
                 </div>
 
@@ -65,4 +59,4 @@
             <a href="https://bootstrapmade.com/"></a>
         </div>
     </div>
-</footer><!-- #footer -->
+</footer>

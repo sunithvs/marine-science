@@ -28,6 +28,9 @@ urlpatterns = [
         "",
         include("home.urls")),
     path(
+        "maricon/",
+        include("maricon.urls")),
+    path(
         settings.ADMIN_URL,
         admin.site.urls),
 

@@ -67,6 +67,7 @@ THIRD_PARTY_APPS = [
 CUSTOM_APPS = [
     "auth_login",
     'home',
+    'maricon',
 ]
 
 INSTALLED_APPS += CUSTOM_APPS + THIRD_PARTY_APPS
