@@ -9,13 +9,13 @@ from .base import *
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "eventsradar",
+    "site_title": "Marine Science",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": 'Dashboard',
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "eventsradar",
+    "site_brand": "Marine Science",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "img/logo.png",
@@ -27,7 +27,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to eventsradar",
+    "welcome_sign": "Welcome to Marine Science",
 
     # Copyright on the footer.html
     # "copyright": f"all rights reserved to {APPLICATION_NAME}",
