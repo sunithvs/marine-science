@@ -45,3 +45,17 @@ class Gallery(models.Model):
     """
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+
+
+class Seminar(models.Model):
+    """
+    Seminars model
+    """
+    title = models.CharField(max_length=100)
+    description = RichTextField()
+    date = models.DateField(auto_now=True)
+    link = models.URLField(blank=True, null=True)
+    show_on_website = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
