@@ -4,7 +4,7 @@ from .models import Speaker, Faq, Sponsor, Schedule, Gallery, CommitteeMember, C
 
 
 class IndexView(TemplateView):
-    template_name = 'new_maricon/index.html'
+    template_name = 'maricon/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -58,3 +58,7 @@ class OtpView(TemplateView):
 
 class SubmissionView(TemplateView):
     template_name = 'maricon/submission.html'
+
+
+class LoginView(TemplateView):
+    template_name = 'maricon/login.html'
