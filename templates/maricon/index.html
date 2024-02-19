@@ -3,50 +3,12 @@
 {% include "maricon/header.html" with committees=committees %}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-
-        }
-
-        :root {
-            --heading-color: #069ed2;
-            --text-color: #0d3caa;
-            --box-bg-color: #c9edfb;
-            --box-bg-gradient-color: linear-gradient(90deg, rgba(201, 237, 251, 1) 0%, rgb(104, 190, 211) 100%);
-        }
-
-        body {
-            height: 100vh;
-            color: var(--text-color);
-        }
-
-        main {
-            padding: 2rem .5rem;
-        }
-
-        section {
-            margin: 2rem 0;
-        }
-
         .sec-1 {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
-        h1 {
-            width: 100%;
-            color: var(--heading-color);
-            padding: .5rem 1rem;
-            text-align: center;
-            font-weight: 700;
-            font-size: 2rem;
-        }
-
+        
         .sec-1 .allbox-container {
 
             display: grid;
@@ -115,9 +77,7 @@
 
         @media (min-width: 768px) {
 
-            main {
-                padding: 2rem 1rem;
-            }
+          
 
 
             .sec-1 .allbox-container {
@@ -158,11 +118,7 @@
         }
 
         @media (min-width: 1024px) {
-
-            main {
-                padding: 2.5rem;
-            }
-
+            
             .sec-1 .box,
             .sec-2 .box {
                 font-size: 1.3rem;
