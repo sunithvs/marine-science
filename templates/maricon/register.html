@@ -1,0 +1,71 @@
+{% extends "maricon/minbase.html" %}
+{% load static %}
+{% block contents %}
+{% include "maricon/header.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Register</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="form-group
+                {% if form.name.errors %}
+                    has-error
+                {% endif %}">
+                    <label for="name" class="inline-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                    {% for error in form.name.errors %}
+                    <span class="help-block
+                        {% if forloop.first %}
+                            with-errors
+                        {% endif %}">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group
+                {% if form.phone_number.errors %}
+                    has-error
+                {% endif %}">
+                    <label for="phone_number" class="inline-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                    {% for error in form.phone_number.errors %}
+                    <span class="help-block
+                        {% if forloop.first %}
+                            with-errors
+                        {% endif %}">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group
+                {% if form.email.errors %}
+                    has-error
+                {% endif %}">
+                    <label for="email" class="inline-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    {% for error in form.email.errors %}
+                    <span class="help-block
+                        {% if forloop.first %}
+                            with-errors
+                        {% endif %}">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="mt-3 mb-5 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .inline-label {
+        display: inline-block;
+        margin-right: 10px; /* Adjust margin as needed */
+    }
+</style>
+
+{% include "maricon/footer.html" with committees=committee_names %}
+{% endblock %}
