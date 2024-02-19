@@ -50,3 +50,11 @@ class CommitteeView(TemplateView):
 
 class RegisterView(TemplateView):
     template_name = 'maricon/register.html'
+
+
+class OtpView(TemplateView):
+    template_name = 'maricon/otp.html'
+
+
+class SubmissionView(TemplateView):
+    template_name = 'maricon/submission.html'
