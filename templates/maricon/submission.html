@@ -2,20 +2,15 @@
 {% load static %}
 {% block contents %}
 {% include "maricon/header.html" %}
-<div class="container">
-    <div class="row">
+<div class="container mb-5 mt-5">
+    <div class="box-container d-flex flex-column align-items-center mt-4 ">
         <div class="col-md-12">
             <h1 class="text-center">Abstract Submission</h1>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
             <form method="post" enctype="multipart/form-data" action="{% url 'submission' %}">  {% csrf_token %}
                 <div class="form-group">
                     <label for="abstract_file">Upload Abstract File:</label>
                     <input type="file" class="form-control-file" id="abstract_file" name="abstract_file" required>
                 </div>
-
                 <div class="mt-3 mb-5 d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -23,6 +18,28 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Copy and adjust styles from the registration page's `box-container` and button styles here */
+    .box-container {
+        background-color: #fff; /* Change the background color to white */
+        border: none; /* Remove the border */
+        padding: 40px; /* Adjust padding as needed */
+        margin: 0 auto; /* Center horizontally */
+        margin-top: 20vh; /* Center vertically, adjust as needed */
+        max-width: 500px; /* Adjust width as needed */
+        width: 100%; /* Ensure responsiveness */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    }
+
+    .box-container h1 {
+        margin-bottom: 20px; /* Adjust margin as needed */
+    }
+
+    .box-container a {
+        color: blue; /* Set the color of the sign-up link to blue */
+    }
+</style>
 
 {% include "maricon/footer.html" with committees=committee_names %}
 {% endblock %}

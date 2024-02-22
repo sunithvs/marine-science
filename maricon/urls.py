@@ -10,6 +10,6 @@ urlpatterns = [
     path('login/otp/', OtpView.as_view(), name='otp'),
     path('submission/', SubmissionView.as_view(), name='submission'),
     path('login/', LoginView.as_view(), name='login'),
-
+    path('otp/', OtpView.as_view(), name='otp'),
 
 ]

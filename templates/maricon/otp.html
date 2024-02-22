@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "maricon/minbase.html" %}
+{% load static %}
+{% block contents %}
+{% include "maricon/header.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Verify Mail</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group
+                {% if form.otp.errors %}
+                    has-error
+                {% endif %}">
+                    <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" required>
+                    {% for error in form.otp.errors %}
+                    <span class="help-block
+                        {% if forloop.first %}
+                            with-errors
+                        {% endif %}">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <p style="color: grey;">Check your mail for OTP</p>
+                <div class="mt-3 mb-5 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<style>
+    .inline-label {
+        display: inline-block;
+        margin-right: 10px; /* Adjust margin as needed */
+    }
+</style>
+
+{% include "maricon/footer.html" with committees=committee_names %}
+{% endblock %}

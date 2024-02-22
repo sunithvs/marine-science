@@ -62,3 +62,7 @@ class SubmissionView(TemplateView):
 
 class LoginView(TemplateView):
     template_name = 'maricon/login.html'
+
+class OtpView(TemplateView):
+    template_name = 'maricon/otp.html'
+

@@ -37,6 +37,39 @@
 
 </head>
 
+
+<style>
+    #intro {
+        height: 80px; /* Adjust value based on your actual navbar height */
+    }
+
+    @media (max-width: 768px) {
+        #intro {
+            height: 60px; /* Adjust value for smaller screens */
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 992px) {
+        #intro {
+            height: 70px; /* Adjust value for medium screens */
+        }
+    }
+
+    @media (min-width: 992px) {
+        #intro {
+            height: 80px; /* Adjust value for larger screens */
+        }
+    }
+
+    .intro-container {
+        padding: 10px 0; /* Adjust padding values as needed */
+    }
+
+    #intro {
+        max-height: 50vh; /* Adjust value as needed */
+    }
+</style>
+
 <body>
 
 {% block header %}
@@ -44,23 +77,9 @@
 <!--==========================
 Intro Section
 ============================-->
-<section id="intro" class="bg-sea">
-    <div class="intro-container  wow fadeIn">
-        <h1 class="mb-4 pb-0">International Conference on
-            <br><span>“Frontiers in Marine Sciences”</span></h1>
-        <p class="mb-4 pb-0">Organised by School of Marine Sciences, CUSAT</p>
-    </div>
+<section id="intro">
+
 </section>
-
-<style>
-.intro-container {
-    padding: 10px 0; /* Adjust padding values as needed */
-}
-
-#intro {
-    max-height: 50vh; /* Adjust value as needed */
-}
-</style>
 
 
 <main id="main">
