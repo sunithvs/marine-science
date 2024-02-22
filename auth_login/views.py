@@ -247,14 +247,13 @@ class PassLogin(generics.GenericAPIView):
         else:
 
             logger.warning(f"User  is logging in failed.", extra={
-                           'data': "Invalid email or password"})
+                'data': "Invalid email or password"})
             # Invalid request, missing email or password
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class SignUpView(generics.CreateAPIView):
     serializer_class = SignUpSerializer
-
     @swagger_auto_schema(
         request_body=serializer_class,
         responses={
@@ -272,10 +271,8 @@ class SignUpView(generics.CreateAPIView):
                 description="Bad request",
                 schema=TokenSerializer,
             ),
-
         },
         swagger_auto_schema=None,
-
     )
     def create(self, request, *args, **kwargs):
         """
