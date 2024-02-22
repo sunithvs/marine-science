@@ -1,3 +1,5 @@
+from datetime import datetime, timezone, timedelta
+
 from django.db import models
 
 
@@ -95,3 +97,37 @@ class Theme(models.Model):
 
     def __str__(self):
         return self.name
+
+
+def generate_otp():
+    import random
+    while True:
+        otp = ''.join([str(random.randint(0, 9)) for i in range(6)])
+        if not OTP.objects.filter(otp=otp).exists():
+            return otp
+
+
+class OTP(models.Model):
+    otp = models.CharField(max_length=6, default=generate_otp, unique=True)
+    user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE,blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.otp
+
+    @property
+    def expired(self):
+        # Assuming self.created_at is an offset-aware datetime object
+        created_at_with_tz = self.created_at.replace(tzinfo=timezone.utc)
+
+        # Use datetime.now(timezone.utc) to get an offset-aware current datetime
+        current_datetime = datetime.now(timezone.utc)
+
+        # Perform the subtraction with both datetime objects being offset-aware
+        return current_datetime - created_at_with_tz > timedelta(minutes=5)
+
+    def is_valid(self):
+        return not self.expired and not self.used
+
+
