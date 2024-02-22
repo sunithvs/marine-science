@@ -1,7 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import login
+# import send email function
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from auth_login.forms import SignUpForm
 from auth_login.models import User
 from .models import Speaker, Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP
 
@@ -55,21 +58,53 @@ class CommitteeView(AbstractView):
 
 
 class RegisterView(AbstractView):
-    template_name = 'maricon/register.html'
+    template_name = 'new_maricon/signup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RegisterView, self).get_context_data(**kwargs)
+        context['form'] = SignUpForm()
+        return context
+
+    def post(self, request):
+        if request.method == 'POST':
+            # Assuming you have a custom User model, adjust the form accordingly
+            form = SignUpForm(request.POST)
+
+            if form.is_valid():
+                # Create a new user with the extended information
+                user = form.save(commit=False)
+                user.full_name = form.cleaned_data['full_name']
+                user.gender = form.cleaned_data['gender']
+                user.mobile_number = form.cleaned_data['mobile_number']
+                user.save()
+                messages.success(request, 'Account created successfully.')
+                context = self.get_context_data()
+                OTP.objects.create(user=user).send_email()
+                context['otp'] = True
+                context['email'] = user.email
+                print("KKKKKKKKKKKKKKKKKKKKKKKK")
+                return render(request, 'new_maricon/signup.html', context)
+            else:
+                print(form.errors.as_data())
+                messages.error(request, 'Error creating the account. Please check the form.')
+
+        return render(request, 'new_maricon/signup.html', self.get_context_data())
 
 
 class OtpView(AbstractView):
-    template_name = 'maricon/login.html'
+    template_name = 'new_maricon/login.html'
 
     def post(self, request):
         email = request.POST.get('email')
         otp = request.POST.get('otp')
+        print(email, otp)
         if not email or not otp:
             return redirect('maricon:login')
         email = email.lower().strip()
         otp = otp.strip()
         otp_obj = OTP.objects.filter(user__email=email, otp=otp)
         if otp_obj.exists() and otp_obj.first().is_valid():
+            print("kkkkkkkkkkkkkkkkkoii")
             login(request, otp_obj.first().user)
             return redirect('submission')
         else:
@@ -81,8 +116,10 @@ class OtpView(AbstractView):
             return render(request, self.template_name, context)
 
 
-class SubmissionView(AbstractView):
-    template_name = 'maricon/submission.html'
+def submission_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'new_maricon/index.html')
+    return redirect('login')
 
 
 class LoginView(AbstractView):
@@ -94,11 +131,10 @@ class LoginView(AbstractView):
         context = self.get_context_data()
 
         if User.objects.filter(email=email).exists():
-            OTP.objects.create(user=User.objects.get(email=email))
+            otp = OTP.objects.create(user=User.objects.get(email=email))
             context['otp'] = True
             context['email'] = email
-
-            # set cookie
+            otp.send_email()
             response = render(request, self.template_name, context)
 
             return response

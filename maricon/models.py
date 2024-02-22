@@ -1,9 +1,30 @@
+import smtplib
+import ssl
 from datetime import datetime, timezone, timedelta
 
 from django.db import models
 
+from config.settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
-# Create your models here.
+
+def send_email(message, receiver, otp=None):
+    port = 587  # For starttls
+    smtp_server = "smtp.gmail.com"
+    sender_email = EMAIL_HOST_USER
+    receiver_email = receiver
+    password = EMAIL_HOST_PASSWORD
+    subject = "Maricon Registration/Login verification"
+    text = message
+    message = f'Subject: {subject}\n\n{text}'
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.ehlo()  # Can be omitted
+        server.starttls(context=context)
+        server.ehlo()  # Can be omitted
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
 
 class Speaker(models.Model):
     name = models.CharField(max_length=100)
@@ -130,4 +151,19 @@ class OTP(models.Model):
     def is_valid(self):
         return not self.expired and not self.used
 
+    def send_email(self):
+        msg = "Your OTP for login to Maricon is  " + self.otp + "  Please enter this OTP to login."
+        send_email(msg, self.user.email, self.otp)
 
+
+class PaperAbstract(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.CharField(max_length=100)
+    abstract = models.TextField(blank=True, null=True)
+    keywords = models.CharField(max_length=100)
+    file = models.FileField(upload_to='abstracts', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
