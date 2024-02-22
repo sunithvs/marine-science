@@ -71,7 +71,19 @@
     <section id="hero " class="hero d-flex align-items-center" style="background-color: #f3f6fc">
         <div class="container">
             <div class="row gy-4 d-flex justify-content-center">
-                <div class="d-flex flex-column justify-content-center col-lg-8 ">
+                <div id="featured-services" class="d-flex flex-column justify-content-center col-lg-8 ">
+                    {% if abstract %}
+                        <div class="col-lg-12 service-item d-flex text-dark" data-aos="fade-up">
+                            <div>
+                                <h2 class="text-dark">Submitted Abstract</h2>
+                                <h4 class="title">{{ abstract.title }}</h4>
+                                <p class="description">{{ abstract.authors }}</p>
+                                <a href="{{ abstract.file.url }}"
+                                   class="readmore stretched-link"><span>Abstract File</span><i
+                                        class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    {% else %}
                     {% if err %}
                         <h5 class="text-danger">{{ msg }}</h5>
                     {% endif %}
@@ -79,50 +91,41 @@
                         <h5 class="text-danger">There was an error with your submission. Please check the form and try
                             again.</h5>
                     {% endif %}
-                    {% if form. %}
-                        <h5 class="text-danger">{{ form.full_name.errors }}</h5>
+                        {% if form.title.errors %}
+                            <h5 class="text-danger">{{ form.title.errors }}</h5>
                     {% endif %}
-                    {% if form.email.errors %}
-                        <h5 class="text-danger">{{ form.email.errors }}</h5>
+                        {% if form.authors.errors %}
+                            <h5 class="text-danger">{{ form.authors.errors }}</h5>
                     {% endif %}
-                    {% if form.mobile_number.errors %}
-                        <h5 class="text-danger">{{ form.mobile_number.errors }}</h5>
+                        {% if form.abstract.errors %}
+                            <h5 class="text-danger">{{ form.abstract.errors }}</h5>
                     {% endif %}
-                    {% if otp %}
-                        <form action="/maricon/login/otp/" class="form-search d-flex align-items-stretch mb-3"
-                              data-aos="fade-up" method="post"
+                        {% if form.file.errors %}
+                            <h5 class="text-danger">{{ form.file.errors }}</h5>
+                    {% endif %}
+
+                        <form action="/maricon/abstract/" class="form-search  mb-3"
+                              data-aos="fade-up" method="post" enctype="multipart/form-data"
                               data-aos-delay="50">
                             {% csrf_token %}
-                            <input name="otp" type="text" class="form-control"
-                                   placeholder="Enter the otp to continue">
-                            <input name="email" type="email" hidden value="{{ email }}">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    {% else %}
-                        <form action="/maricon/register/" class="form-search  mb-3"
-                              data-aos="fade-up" method="post"
-                              data-aos-delay="50">
-                            {% csrf_token %}
-                            <input name="full_name" type="text" class="form-control"
-                                   placeholder="Enter Full Name" required>
+                            <input name="title" type="text" class="form-control"
+                                   placeholder="Enter title  of the abstract" required>
 
-                            <input name="email" type="email" class="form-control"
-                                   placeholder="Enter Email Id" required>
+                            <input name="authors" type="text" class="form-control"
+                                   placeholder="Enter authors name (comma seperated)" required>
+                            <input name="keywords" type="text" class="form-control"
+                                   placeholder="Enter keywords name (comma seperated)" required>
 
-                            <select name="gender" class="form-control" required>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <textarea name="abstract" class="form-control"
+                                      placeholder="Enter abstract" required></textarea>
 
-                            <input name="mobile_number" type="tel" class="form-control"
-                                   placeholder="Enter Mobile Number" required>
+                            <input name="file" type="file" class="form-control"
+                                   placeholder="Upload file" required>
+
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary ">Sign Up</button>
+                                <button type="submit" class="btn btn-primary ">Submit</button>
                             </div>
                         </form>
-
                     {% endif %}
                 </div>
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CommitteeMember, Gallery, Speaker, Sponsor, Faq, Schedule, Committee, OTP
+from .models import CommitteeMember, Gallery, Speaker, Sponsor, Faq, Schedule, Committee, OTP, PaperAbstract
 
 admin.site.register(CommitteeMember)
 admin.site.register(Gallery)
@@ -17,4 +17,11 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 @admin.register(OTP)
 class OTPAdmin(admin.ModelAdmin):
-    list_display = ( 'otp', 'created_at')
+    list_display = ('otp', 'created_at')
+
+
+@admin.register(PaperAbstract)
+class PaperAbstractAdmin(admin.ModelAdmin):
+    list_display = ('title', 'authors', 'created_at')
+    search_fields = ('title', 'authors')
+    list_filter = ('created_at',)

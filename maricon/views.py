@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 # import send email function
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
 from auth_login.forms import SignUpForm
 from auth_login.models import User
-from .models import Speaker, Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP
+from .forms import PaperAbstractForm
+from .models import Speaker, Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract
 
 
 class AbstractView(TemplateView):
@@ -116,9 +118,51 @@ class OtpView(AbstractView):
             return render(request, self.template_name, context)
 
 
+@login_required(redirect_field_name='/maricon/login/')
 def submission_view(request):
+    context = {'speakers': Speaker.objects.all(), 'faqs': Faq.objects.all(), 'sponsors': Sponsor.objects.all(),
+               'schedule': [
+                   {
+                       'day': 'Day 1',
+                       'schedule': Schedule.objects.filter(day='Day 1')
+                   },
+                   {
+                       'day': 'Day 2',
+                       'schedule': Schedule.objects.filter(day='Day 2')
+                   },
+                   {
+                       'day': 'Day 3',
+                       'schedule': Schedule.objects.filter(day='Day 3')
+                   },
+               ], 'gallery': Gallery.objects.all(),
+               "themas": Theme.objects.all(),
+               "abstract": PaperAbstract.objects.filter(user=request.user).first()
+               }
+    committees = Committee.objects.only('name').order_by('-size_on_website')
+    context['committees'] = committees
     if request.user.is_authenticated:
-        return render(request, 'new_maricon/index.html')
+        if request.method == 'POST':
+            form = PaperAbstractForm(request.POST, request.FILES)
+            print(request.FILES)
+            if form.is_valid():
+                # Save the abstract to the database
+                abstract = form.save()
+                abstract.user = request.user
+                abstract.save()
+                context['abstract'] = abstract
+
+                messages.success(request, 'Abstract submitted successfully!')
+                return render(request, 'new_maricon/abstract.html', context)
+            else:
+                messages.error(request, 'Error submitting the abstract. Please check the form.')
+                print(form.errors.as_data())
+
+        else:
+            form = PaperAbstractForm()
+            context['form'] = form
+
+        return render(request, 'new_maricon/abstract.html', context)
+
     return redirect('login')
 
 
