@@ -3,8 +3,8 @@ base.py
 Base Settings for Django Project
 """
 
-import os
 from pathlib import Path
+
 import environ
 
 env = environ.Env()
@@ -76,7 +76,7 @@ INSTALLED_APPS += CUSTOM_APPS + THIRD_PARTY_APPS
 APPLICATION_NAME = 'internship task'
 
 # Login URL
-LOGIN_URL = "/auth/login/pass/"
+LOGIN_URL = "/maricon/login/"
 
 # Middleware
 MIDDLEWARE = [
