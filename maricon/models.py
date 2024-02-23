@@ -1,5 +1,6 @@
 import smtplib
 import ssl
+import threading
 from datetime import datetime, timezone, timedelta
 
 from django.db import models
@@ -153,8 +154,7 @@ class OTP(models.Model):
 
     def send_email(self):
         msg = "Your OTP for login to Maricon is  " + self.otp + "  Please enter this OTP to login."
-        send_email(msg, self.user.email, self.otp)
-
+        threading.Thread(target=send_email, args=(msg, self.user.email, self.otp)).start()
 
 class PaperAbstract(models.Model):
     user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE,blank=True,null=True)

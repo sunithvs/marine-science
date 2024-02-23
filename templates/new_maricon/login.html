@@ -76,6 +76,8 @@
                         <h5 class="text-danger">{{ msg }}</h5>
                     {% endif %}
                     {% if otp %}
+                        <h5 class="text-black-50">An OTP has been sent to your email. Please enter the OTP to
+                            continue </h5>
                         <form action="/maricon/login/otp/" class="form-search d-flex align-items-stretch mb-3"
                               data-aos="fade-up" method="post"
                               data-aos-delay="50">
@@ -94,6 +96,7 @@
                                    placeholder="Enter Email Id to continue">
                             <button type="submit" class="btn btn-primary">Next</button>
                         </form>
+                        <p class="text-black-50">Don't have an account ? <a href="/maricon/register/">Sign up</a></p>
                     {% endif %}
                 </div>
 
