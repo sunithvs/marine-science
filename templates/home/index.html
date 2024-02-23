@@ -120,6 +120,34 @@
             </div>
         </div>
     </section>
+    {% if seminars %}
+        <section id="seminars" class="section-with-bg wow fadeInUp">
+            <div id="hotels" class="container">
+                <div class="section-header">
+                    <h2>Seminars</h2>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% for seminar in seminars %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="hotel">
+                                <div class="hotel-img">
+                                    <a href="{{ seminar.link }}">
+                                    <img src="{{ seminar.image.url }}" alt="Hotel 3" class="img-fluid">
+                                        </a>
+                                </div>
+                                <div class="text-center text-dark">
+                                <h3>{{ seminar.title }}</h3>
+                                    
+                                </div>
+{#                                <p>{{ seminar.description|safe }}</p>#}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    {% endif %}
 
 
     <section id="gallery" class="wow fadeInUp">

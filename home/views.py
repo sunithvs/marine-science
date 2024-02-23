@@ -5,7 +5,7 @@ Views of home page
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from home.models import Notice, notice_types,Gallery
+from home.models import Notice, notice_types, Gallery, Seminar
 
 
 class HomeView(TemplateView):
@@ -70,6 +70,7 @@ class HomeView(TemplateView):
                 notices[notice_type] = Notice.objects.filter(type=notice_type).order_by('-date')[:6]
         context["notices"] = notices
         context['gallery'] = Gallery.objects.all()
+        context['seminars'] = Seminar.objects.all()
         return context
 
     def get(self, request, *args, **kwargs):
