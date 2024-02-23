@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # Expose the port on which Gunicorn will run
-EXPOSE 8000
+EXPOSE 8002
 
 # if production use gunicorn else use django server
 #CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "config.wsgi:application"]
