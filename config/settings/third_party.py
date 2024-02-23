@@ -2,10 +2,9 @@
 
 """
 
+import os
+
 from .base import *
-
-
-
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)

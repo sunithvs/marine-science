@@ -6,7 +6,7 @@ Base Settings for Django Project
 from pathlib import Path
 
 import environ
-
+import os
 env = environ.Env()
 
 environ.Env.read_env('.env')
