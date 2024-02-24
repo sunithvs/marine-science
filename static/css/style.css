@@ -1861,3 +1861,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   vertical-align: -0.035em;
   fill: currentcolor;
 }
+
+.container {
+  max-width: 1280px !important;
+}

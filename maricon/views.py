@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from .forms import PaperAbstractForm
-from .models import Speaker, Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract
+from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract, Speaker
 
 
 class AbstractView(TemplateView):
@@ -32,9 +32,38 @@ class AbstractView(TemplateView):
                 'schedule': Schedule.objects.filter(day='Day 3')
             },
         ]
+        context['themes'] = [
+            " Oceans and Climate change",
+            "Coastal Processes and Estuarine Dynamics",
+            " Marine Bio-geochemical Dynamics.",
+            "Marine Bio-prospecting – Natural Products and Drugs",
+            "Coupled  Ocean Atmospheric Modeling",
+            ' Air - Sea Interactions',
+            "Remote Sensing Applications in Earth System Sciences",
+            'Isotope Geochemistry',
+            'Environmental Geosciences and Geohazards',
+            'Deep Continental Studies and Geodynamics',
+            'Quaternary Environment and Paleoclimate',
+            'Geo - Marine Resources and Exploration',
+            'Submarine Groundwater Discharge and Mapping',
+            'Marine Biodiversity and Conservation',
+            'Marine Genomics',
+            'Advancements in Aquaculture',
+            'Aquatic Animal Health and Management Strategies',
+            'Regional Climate Modeling',
+            'Ocean Observation Systems',
+            'Monsoon Prediction and Predictability',
+            'Aerosols and Air Quality',
+            'Fisheries for Food Security and Sustainable Livelihoods',
+            'Marine Policies and Regulations',
+            'Societal Applications of Marine-Geosciences',
+            'Polar Sciences'
+
+        ]
         context['gallery'] = Gallery.objects.all()
         committees = Committee.objects.only('name').order_by('-size_on_website')
         context['committees'] = committees
+
         return context
 
 
@@ -186,3 +215,78 @@ class LoginView(AbstractView):
         context['msg'] = "Invalid Email Please Register to continue"
         print(context)
         return render(request, self.template_name, context)
+
+
+class TeamView(AbstractView):
+    template_name = 'new_maricon/team.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamView, self).get_context_data(**kwargs)
+
+        context["advisory"] = [
+            "Prof. (Dr.) P. G. Sankaran, Vice Chancellor, CUSAT",
+            "Dr. M. Ravichandran, Secretary, MoES, New Delhi",
+            "Dr. Shailesh Nayk, Director, NIAS, Bangalore",
+            "Dr. Rasik Ravindra, Chairman, INSA-SCAR, New Delhi",
+            "Dr. Thamban Meloth, Director, NCPOR, Goa",
+            "Prof. (Dr.) N.V. Chalapathi Rao, Director, NCESS, Trivandrum",
+            "Prof. (Dr.) N. C. Pant, Delhi University, New Delhi",
+            "Prof. (Dr.) M. Radhakrishna, IIT-Bombay, Mumbai",
+            "Prof. (Dr.) C.T. Aravindakumar, Vice Chancellor, MG University",
+            "Prof. (Dr.) Bijoy S. Nandan, Vice Chancellor, Kannur University",
+            "Prof. (Dr.) T. Pradeep Kumar, Vice-Chancellor, KUFOS, Kochi",
+            "Prof. (Dr.) Harilal B. Menon, Vice-Chancellor, Goa University",
+            "Prof. (Dr.) Hironori Ando, Niigata University, Japan",
+            "Prof. (Dr.) Satish Kumar, Niigata University",
+            "Prof. (Dr.) Syed Hashsham, Michigan State University, USA",
+            "Prof. (Dr.) PKSM Rahman, Liverpool John Moores University, UK",
+            "Prof. (Dr.) A. P. Pradeepkumar, Director, SESS, University of Kerala",
+            "Prof. (Dr.) S. Suresh Kumar, Dean, KUFOS, Kochi",
+            "Dr.David Jones,CEO, Justoneocean, UK",
+            'Dr. Ajaya Ravindran, NYU, Abu Dhabi',
+            "Dr. GVM Gupta, Director, CMLRE, Kochi",
+            "Dr. M. Habibulla, Director, CIFNET, Koch",
+            'Dr. George Ninan, Director, CIFT, Kochi',
+            'Dr. A. Gopalakrishnan,Director, CMFRI, Kochi',
+            'Dr. Manoj Samuel, Executive Director, CWRDM, Calicut',
+            'Dr. Jyothibabu R., Division Head, NIO-RC, Kochi',
+            'Dr. N.P. Kurian, Vice President, Ocean Society of India'
+        ]
+        context["local"] = [
+            "Prof.(Dr.) A.A.Mohamed Hatha(Organizing Chairman)",
+            "Prof.(Dr.)Sunil P.S.(Organizing Convenor)",
+            "Dr.Rahul Mohan(Co - convenor)", ]
+        context["members"] = [
+            "Prof. (Dr.) R. Sajeev",
+            "Prof. (Dr.) K. Satheeshan",
+            "Prof. (Dr.) Sajeevan T. P.",
+            "Shri. Baby Chakrapani",
+            "Dr. Joji V. S.",
+            "Dr. Abhilash S.",
+            "Dr. P. Preetham Elumalai",
+            "Dr. Venu S.",
+            "Dr. V. Madhu",
+            "Dr. Saji P. K.",
+            "Dr. Ajayakumar P.",
+            "Dr. N. R. Nisha",
+            "Dr. Swapna P. Antony",
+            "Dr. Priyaja P.",
+            "Dr. K. B. Padmakumar",
+            "Dr. Habeeb Rahman",
+            "Dr. V. Vijith",
+            "Dr. Ratheesh Kumar R. T.",
+            "Dr. Shaju S. S.",
+            "Dr. Jorphin Joseph",
+            "Dr. Midhun M",
+            "Dr. Lekshmi P. R.",
+            "Dr. Amaldev T.",
+            "Dr. Honey H. Das",
+            "Dr. Naveen P. U.",
+            "Dr. Selvia Kuriakose",
+            "Dr. Sreekala P. P.",
+            "Dr. Chaithanya E. R.",
+            "Dr. Lathika Cicily Thomas",
+            "Dr. Mohammed Noohu Nazeer"
+        ]
+
+        return context

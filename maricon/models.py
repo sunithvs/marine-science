@@ -29,6 +29,7 @@ def send_email(message, receiver, otp=None):
 
 class Speaker(models.Model):
     name = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=100, default="")
     description = models.CharField(max_length=100)
     image = models.ImageField(upload_to='speakers', null=True, blank=True)
     facebook = models.URLField(max_length=100, null=True, blank=True)
@@ -155,6 +156,7 @@ class OTP(models.Model):
     def send_email(self):
         msg = "Your OTP for login to Maricon is  " + self.otp + "  Please enter this OTP to login."
         threading.Thread(target=send_email, args=(msg, self.user.email, self.otp)).start()
+
 
 class PaperAbstract(models.Model):
     user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE,blank=True,null=True)
