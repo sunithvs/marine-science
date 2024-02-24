@@ -99,7 +99,9 @@
                 <div class="row justify-content-center">
                     {% for department in departments %}
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100 transform-gpu rounded-3xl bg-white/60 hover:bg-white/70 ring-2 ring-gray-900/10 backdrop-blur-lg transition-all duration-300 ease-out cursor-pointer">
+                            <div class="card h-100 transform-gpu rounded-3xl bg-white/60 hover:bg-white/70 ring-2 ring-gray-900/10 backdrop-blur-lg transition-all duration-300 ease-out cursor-pointer "
+                                 style="background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);">
                                 <a href="{{ department.website }}" target="_blank" rel="noopener noreferrer"
                                    class="card-link">
                                     <div class="card-body d-flex flex-column align-items-center text-center">
@@ -120,6 +122,61 @@
             </div>
         </div>
     </section>
+
+
+    {% if facilities %}
+        <section id="facilities" class="section-with-bg wow fadeInUp">
+            <div id="hotels" class="container">
+                <div class="section-header">
+                    <h2>Facilities</h2>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% for facility in facilities %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="hotel">
+                                <div class="hotel-img">
+                                    <a href="{{ facility.link }}">
+                                        <img src="{{ facility.image.url }}" alt="Hotel 3" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="text-center text-dark">
+                                    <h3>{{ facility.title }}</h3>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    {% endif %}
+    {% if publications %}
+        <section id="publications" class=" wow fadeInUp">
+            <div id="hotels" class="container">
+                <div class="section-header">
+                    <h2>Publications</h2>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% for publication in publications %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="hotel">
+                                <div class="hotel-img">
+                                    <a href="{{ publication.link }}">
+                                        <img src="{{ publication.image.url }}" alt="Hotel 3" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="text-center text-dark">
+                                    <h3>{{ publication.title }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    
     {% if seminars %}
         <section id="seminars" class="section-with-bg wow fadeInUp">
             <div id="hotels" class="container">
@@ -149,7 +206,34 @@
         </section>
     {% endif %}
 
+    {% if journals %}
+        <section id="journal" class=" wow fadeInUp">
+            <div id="hotels" class="container">
+                <div class="section-header">
+                    <h2>Seminars</h2>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% for journal in journals %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="hotel">
+                                <div class="hotel-img">
+                                    <a href="{{ journal.link }}">
+                                        <img src="{{ journal.image.url }}" alt="Hotel 3" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="text-center text-dark">
+                                    <h3>{{ journal.title }}</h3>
 
+                                </div>
+                                {#
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    {% endif %}
     <section id="gallery" class="wow fadeInUp">
 
         <div class="container">

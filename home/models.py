@@ -60,3 +60,52 @@ class Seminar(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Facility(models.Model):
+    """
+    Facility model
+    """
+    title = models.CharField(max_length=100)
+    description = RichTextField()
+    date = models.DateField(auto_now=True)
+    link = models.URLField(blank=True, null=True)
+    show_on_website = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    # meta
+    class Meta:
+        verbose_name_plural = "Facilities"
+
+
+class Publication(models.Model):
+    """
+    Publication model
+    """
+    title = models.CharField(max_length=100)
+    description = RichTextField()
+    date = models.DateField(auto_now=True)
+    link = models.URLField(blank=True, null=True)
+    show_on_website = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Journals(models.Model):
+    """
+    Journals model
+    """
+    title = models.CharField(max_length=100)
+    description = RichTextField()
+    date = models.DateField(auto_now=True)
+    link = models.URLField(blank=True, null=True)
+    show_on_website = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title

@@ -5,7 +5,7 @@ Views of home page
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from home.models import Notice, notice_types, Gallery, Seminar
+from home.models import Notice, notice_types, Gallery, Seminar, Journals, Publication, Facility
 
 
 class HomeView(TemplateView):
@@ -22,7 +22,6 @@ class HomeView(TemplateView):
                 "website": "http://das.cusat.ac.in/",
                 "courses": [
                     "M. Sc. Meteorology",
-                    "M. Tech. Atmospheric Sciences",
                     "Ph. D."
                 ]
             },
@@ -31,7 +30,6 @@ class HomeView(TemplateView):
                 "website": "https://dpo.cusat.ac.in/",
                 "courses": [
                     "M. Sc. Oceanography",
-                    "M. Tech. Ocean Technology",
                     "Ph. D."
                 ]
             },
@@ -40,9 +38,7 @@ class HomeView(TemplateView):
                 "website": "https://cod.cusat.ac.in/",
                 "courses": [
                     "M. Sc. Hydrochemistry",
-                    "M. Phil. Marine Chemistry",
                     "Ph. D.",
-                    "Post Doctoral Research (PDF)"
                 ]
             },
             {
@@ -50,7 +46,7 @@ class HomeView(TemplateView):
                 "website": "https://mbmb.cusat.ac.in/",
                 "courses": [
                     "M. Sc. Marine Biology",
-                    "M. Phil Life Sciences",
+                    "M. Sc. Marine Genomics",
                     "Ph. D."
                 ]
             },
@@ -71,6 +67,9 @@ class HomeView(TemplateView):
         context["notices"] = notices
         context['gallery'] = Gallery.objects.all()
         context['seminars'] = Seminar.objects.all()
+        context['journals'] = Journals.objects.all()
+        context['publications'] = Publication.objects.all()
+        context['facilities'] = Facility.objects.all()
         return context
 
     def get(self, request, *args, **kwargs):

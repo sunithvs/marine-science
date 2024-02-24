@@ -603,15 +603,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 #intro .about-btn {
   font-family: "Raleway", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 24px;
   letter-spacing: 1px;
   display: inline-block;
-  padding: 12px 32px;
+  padding: 22px 32px;
   border-radius: 50px;
   transition: 0.5s;
   line-height: 1;
   margin: 10px;
   color: #fff;
+  font-weight: bold;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
   border: 2px solid #3399cc;
@@ -657,13 +658,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 #about {
   overflow: hidden;
   position: relative;
-  color: #fff;
+  color: #000000;
 
 }
 
 #about:before {
   content: "";
-  background: rgba(20, 29, 52, 0.8);
+  background: rgba(84, 106, 160, 0.8);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -675,7 +676,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #fff;
+  color: #000000;
 }
 
 #about h3 {
@@ -683,13 +684,15 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 10px;
-  color: #fff;
+  color: #000000;
 }
 
 #about p {
   font-size: 18px;
   margin-bottom: 20px;
-  color: #fff;
+  color: #000000;
+  /*# justify text*/
+    text-align: justify;
 }
 
 /*--------------------------------------------------------------
