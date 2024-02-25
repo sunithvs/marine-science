@@ -8,7 +8,8 @@ from django.views.generic import TemplateView
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from .forms import PaperAbstractForm
-from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract, Speaker
+from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract, Speaker, \
+    THEMES
 
 
 class AbstractView(TemplateView):
@@ -32,34 +33,7 @@ class AbstractView(TemplateView):
                 'schedule': Schedule.objects.filter(day='Day 3')
             },
         ]
-        context['themes'] = [
-            " Oceans and Climate change",
-            "Coastal Processes and Estuarine Dynamics",
-            " Marine Bio-geochemical Dynamics.",
-            "Marine Bio-prospecting – Natural Products and Drugs",
-            "Coupled  Ocean Atmospheric Modeling",
-            ' Air - Sea Interactions',
-            "Remote Sensing Applications in Earth System Sciences",
-            'Isotope Geochemistry',
-            'Environmental Geosciences and Geohazards',
-            'Deep Continental Studies and Geodynamics',
-            'Quaternary Environment and Paleoclimate',
-            'Geo - Marine Resources and Exploration',
-            'Submarine Groundwater Discharge and Mapping',
-            'Marine Biodiversity and Conservation',
-            'Marine Genomics',
-            'Advancements in Aquaculture',
-            'Aquatic Animal Health and Management Strategies',
-            'Regional Climate Modeling',
-            'Ocean Observation Systems',
-            'Monsoon Prediction and Predictability',
-            'Aerosols and Air Quality',
-            'Fisheries for Food Security and Sustainable Livelihoods',
-            'Marine Policies and Regulations',
-            'Societal Applications of Marine-Geosciences',
-            'Polar Sciences'
-
-        ]
+        context['themes'] = THEMES
         context['gallery'] = Gallery.objects.all()
         committees = Committee.objects.only('name').order_by('-size_on_website')
         context['committees'] = committees
@@ -135,7 +109,6 @@ class OtpView(AbstractView):
         otp = otp.strip()
         otp_obj = OTP.objects.filter(user__email=email, otp=otp)
         if otp_obj.exists() and otp_obj.first().is_valid():
-            print("kkkkkkkkkkkkkkkkkoii")
             login(request, otp_obj.first().user)
             return redirect('submission')
         else:
@@ -164,7 +137,7 @@ def submission_view(request):
                        'schedule': Schedule.objects.filter(day='Day 3')
                    },
                ], 'gallery': Gallery.objects.all(),
-               "themas": Theme.objects.all(),
+               "themes": THEMES,
                "abstract": PaperAbstract.objects.filter(user=request.user).first()
                }
     committees = Committee.objects.only('name').order_by('-size_on_website')

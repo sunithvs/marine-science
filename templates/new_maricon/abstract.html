@@ -103,6 +103,14 @@
                               data-aos="fade-up" method="post" enctype="multipart/form-data"
                               data-aos-delay="50">
                             {% csrf_token %}
+                            <h5 class="text-dark">Theme:
+                            </h5>
+                            <select name="theme" class="form-control" required>
+                                <option value="">Select a theme</option>
+
+                                {% for theme in themes %}
+                                    <option value="{{ theme }}">{{ theme }}</option>
+                                {% endfor %}
                             <input name="title" type="text" class="form-control"
                                    placeholder="Enter title  of the abstract" required>
 

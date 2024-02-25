@@ -7,6 +7,31 @@ from django.db import models
 
 from config.settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
+THEMES = [" Oceans and Climate change",
+          "Coastal Processes and Estuarine Dynamics",
+          " Marine Bio-geochemical Dynamics.",
+          "Marine Bio-prospecting – Natural Products and Drugs",
+          "Coupled  Ocean Atmospheric Modeling",
+          ' Air - Sea Interactions',
+          "Remote Sensing Applications in Earth System Sciences",
+          'Isotope Geochemistry',
+          'Environmental Geosciences and Geohazards',
+          'Deep Continental Studies and Geodynamics',
+          'Quaternary Environment and Paleoclimate',
+          'Geo - Marine Resources and Exploration',
+          'Submarine Groundwater Discharge and Mapping',
+          'Marine Biodiversity and Conservation',
+          'Marine Genomics',
+          'Advancements in Aquaculture',
+          'Aquatic Animal Health and Management Strategies',
+          'Regional Climate Modeling',
+          'Ocean Observation Systems',
+          'Monsoon Prediction and Predictability',
+          'Aerosols and Air Quality',
+          'Fisheries for Food Security and Sustainable Livelihoods',
+          'Marine Policies and Regulations',
+          'Societal Applications of Marine-Geosciences',
+          'Polar Sciences']
 
 def send_email(message, receiver, otp=None):
     port = 587  # For starttls
@@ -167,7 +192,7 @@ class PaperAbstract(models.Model):
     file = models.FileField(upload_to='abstracts', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE,blank=True,null=True)
+    theme = models.CharField(max_length=100, choices=[(i, i) for i in THEMES],default=THEMES[0])
 
     def __str__(self):
         return self.title

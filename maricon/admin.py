@@ -24,4 +24,4 @@ class OTPAdmin(admin.ModelAdmin):
 class PaperAbstractAdmin(admin.ModelAdmin):
     list_display = ('title', 'authors', 'created_at')
     search_fields = ('title', 'authors')
-    list_filter = ('created_at',)
+    list_filter = ('created_at', 'theme',)
