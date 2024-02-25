@@ -56,7 +56,7 @@ class Seminar(models.Model):
     date = models.DateField(auto_now=True)
     link = models.URLField(blank=True, null=True)
     show_on_website = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+    image = models.ImageField(upload_to='seminar/')
 
     def __str__(self):
         return self.title
@@ -71,7 +71,7 @@ class Facility(models.Model):
     date = models.DateField(auto_now=True)
     link = models.URLField(blank=True, null=True)
     show_on_website = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+    image = models.ImageField(upload_to='seminar/')
 
     def __str__(self):
         return self.title
@@ -90,7 +90,7 @@ class Publication(models.Model):
     date = models.DateField(auto_now=True)
     link = models.URLField(blank=True, null=True)
     show_on_website = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+    image = models.ImageField(upload_to='seminar/')
 
     def __str__(self):
         return self.title
@@ -105,7 +105,7 @@ class Journals(models.Model):
     date = models.DateField(auto_now=True)
     link = models.URLField(blank=True, null=True)
     show_on_website = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='seminar/', blank=True, null=True)
+    image = models.ImageField(upload_to='seminar/')
 
     def __str__(self):
         return self.title
