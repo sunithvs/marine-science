@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from .forms import PaperAbstractForm
-from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, Theme, PaperAbstract, Speaker, \
+from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, PaperAbstract, Speaker, \
     THEMES
 
 
@@ -263,3 +263,14 @@ class TeamView(AbstractView):
         ]
 
         return context
+
+
+class PrivacyPolicyView(AbstractView):
+    template_name = 'new_maricon/privacy.html'
+
+class TermsView(AbstractView):
+    template_name = 'new_maricon/terms.html'
+
+class RefundView(AbstractView):
+    template_name = 'new_maricon/refund.html'
+

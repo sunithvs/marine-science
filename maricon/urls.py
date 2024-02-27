@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import IndexView, CommitteeView, RegisterView, OtpView, LoginView, submission_view, TeamView
+from .views import (IndexView, RegisterView, OtpView, LoginView,
+                    submission_view, TeamView, RefundView, TermsView, PrivacyPolicyView)
 
 urlpatterns = [
     path('', IndexView.as_view(), name='maricon'),
@@ -11,4 +12,8 @@ urlpatterns = [
     path('abstract/', submission_view, name='submission'),
     path('login/', LoginView.as_view(), name='login'),
     path('committee/', TeamView.as_view(), name='login'),
+    path('refund/', RefundView.as_view(), name='refund'),
+    path('terms/', TermsView.as_view(), name='terms'),
+    path('privacy/', PrivacyPolicyView.as_view(), name='privacy'),
+
 ]

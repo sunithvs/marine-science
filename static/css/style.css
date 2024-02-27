@@ -651,10 +651,43 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 
+.marquee-container {
+  margin: 0;
+
+}
+
+.marquee {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  animation: marquee 50s linear infinite;
+  border: 0;
+
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.message {
+  font-size: 1.5rem;
+  color: #000000;
+  padding: 5px;
+  /*background-color: #f0f0f0;*/
+  /*border: 2px solid #ccc;*/
+  border-radius: 10px;
+
+}
+
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
-
 #about {
   overflow: hidden;
   position: relative;
@@ -664,7 +697,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #about:before {
   content: "";
-  background: rgba(84, 106, 160, 0.8);
+
   position: absolute;
   bottom: 0;
   top: 0;

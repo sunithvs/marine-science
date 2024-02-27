@@ -98,8 +98,8 @@
 <section id="hero" class="hero d-flex align-items-center"
          style="background-image: url({% static 'img/maricon_header_bg.webp' %})">
     <div class="container">
-        <div class="row gy-4 d-flex justify-content-between">
-            <div class="col-lg-8 order-2 order-lg-1 d-flex flex-column justify-content-center">
+        <div class="row gy-4 ">
+            <div class="col-lg-8  d-flex flex-column justify-content-center">
                 <h1 class="font-weight-bold fade-up my-3">
                     MARICON <span class="text-warning">2024</span> (8-10 April)
                 </h1>
@@ -152,12 +152,47 @@
                 </div>
             </div>
 
+            {#            <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out">#}
+            {#                <div class="d-flex flex-column">#}
+            {#                    <img width="180px" class="img-fluid mb-3" src="{% static 'img/logos/CUSAT.png' %}" alt="">#}
+            {#                    <img  width="180px" class="img-fluid mb-3" src="{% static 'img/logos/marine.png' %}" alt="">#}
+            {#                    <img width="180px" class="img-fluid" src="{% static 'img/logos/MARICON.png' %}" alt="">#}
+            {#                </div>#}
+            {#            </div>#}
             <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-                <img class="img-fluid mb-3 mb-lg-0" src={% static 'img/maricon_header_img.webp' %}  alt="">
-            </div>
+                <div class="d-flex flex-column">
+                    <!-- Logos arranged horizontally on larger screens -->
+                    <div class="d-none d-lg-flex flex-column align-items-center">
+                        <a href="http://cusat.ac.in">
+                            <img width="180px" class="img-fluid mb-3" src="{% static 'img/logos/CUSAT.png' %}" alt="">
+                        </a>
+                        <a href="http://marine.cusat.ac.in">
+                            <img width="180px" class="img-fluid mb-3" src="{% static 'img/logos/marine.png' %}" alt="">
+                        </a>
+                        <a href="http://marine.cusat.ac.in/maricon/">
+                            <img width="180px" class="img-fluid" src="{% static 'img/logos/MARICON.png' %}" alt="">
 
+                        </a>
+                        <div class="d-lg-none d-flex justify-content-around">
+                            <a href="http://cusat.ac.in">
+
+                                <img width="150px" class="img-fluid mb-3" src="{% static 'img/logos/CUSAT.png' %}"
+                                     alt="">
+                            </a>
+                            <a href="http://marine.cusat.ac.in">
+
+                                <img width="150px" class="img-fluid mb-3" src="{% static 'img/logos/marine.png' %}"
+                                     alt="">
+                            </a>
+                            <a href="http://marine.cusat.ac.in/maricon/">
+                                <img width="150px" class="img-fluid" src="{% static 'img/logos/MARICON.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+
 </section><!-- End Hero Section -->
 
 <main id="main">
@@ -280,7 +315,33 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
         </div>
     </section><!-- End Services Section -->
 
+    <!-- ======= Services Section ======= -->
+    <section id="themes" class="services pt-0">
+        <div id="service" class="container" data-aos="fade-up">
 
+            <div class="section-header">
+                <span>Focal Themes</span>
+                <h2>Focal Themes</h2>
+
+            </div>
+
+            <div class="row gy-4">
+                {% for theme in themes %}
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                        <div class="card p-2 text-center " style="background: #7F7FD5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+
+                            <h3>{{ theme }}</h3>
+                        </div>
+                    </div><!-- End Card Item -->
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
     <!-- ======= Call To Action Section ======= -->
     <section id="registration" class="call-to-action"
              style="background: linear-gradient(rgba(14, 29, 52, 0.6), rgba(14, 29, 52, 0.8)), url({% static 'img/isc-bg.jpg' %}) center center;">
@@ -298,7 +359,8 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
                         presentation.
                         However, the technical committee shall decide the Final Scientific Program. Acceptance will be
                         communicated
-                        to the potential speakers by 25 March, 2024.
+                        to the potential speakers by 25 March, 2024.<br>
+                        <a href="{% static 'doc/Abstract_Template.docx' %}"> Download Abstract Template here</a>
                     </p>
                     <a class="cta-btn" href="/maricon/abstract/">Register Now</a>
 
@@ -308,6 +370,7 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
 
         </div>
     </section><!-- End Call To Action Section -->
+
     <section id="fee" class="pricing pt-0">
         <div class="container" data-aos="fade-up">
 
@@ -400,33 +463,7 @@ background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+
 
         </div>
     </section><!-- End Pricing Section -->
-    <!-- ======= Services Section ======= -->
-    <section id="themes" class="services pt-0">
-        <div id="service" class="container" data-aos="fade-up">
 
-            <div class="section-header">
-                <span>Focal Themes</span>
-                <h2>Focal Themes</h2>
-
-            </div>
-
-            <div class="row gy-4">
-                {% for theme in themes %}
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card p-2 text-center " style="background: #7F7FD5;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-">
-
-                            <h3>{{ theme }}</h3>
-                        </div>
-                    </div><!-- End Card Item -->
-                {% endfor %}
-
-            </div>
-
-        </div>
-    </section><!-- End Services Section -->
     <section id="speakers" class="team pt-0">
         <div id="team" class="container" data-aos="fade-up">
 
