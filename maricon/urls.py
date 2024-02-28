@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (IndexView, RegisterView, OtpView, LoginView,
-                    submission_view, TeamView, RefundView, TermsView, PrivacyPolicyView)
+                    submission_view, TeamView, RefundView, TermsView, PrivacyPolicyView, DisclaimerView)
 
 urlpatterns = [
     path('', IndexView.as_view(), name='maricon'),
@@ -15,5 +15,5 @@ urlpatterns = [
     path('refund/', RefundView.as_view(), name='refund'),
     path('terms/', TermsView.as_view(), name='terms'),
     path('privacy/', PrivacyPolicyView.as_view(), name='privacy'),
-
+    path('disclaimer/', DisclaimerView.as_view(), name='disclaimer'),
 ]

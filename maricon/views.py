@@ -275,3 +275,6 @@ class TermsView(AbstractView):
 class RefundView(AbstractView):
     template_name = 'new_maricon/refund.html'
 
+
+class DisclaimerView(AbstractView):
+    template_name = 'new_maricon/disclaimer.html'
