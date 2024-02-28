@@ -6,7 +6,7 @@ Staging Settings for Django Project
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env.bool('DEBUG', default=False)
 
 # Allowed hosts
 ALLOWED_HOSTS = [
