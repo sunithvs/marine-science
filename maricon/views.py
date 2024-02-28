@@ -148,9 +148,10 @@ def submission_view(request):
             print(request.FILES)
             if form.is_valid():
                 # Save the abstract to the database
-                abstract = form.save()
+                abstract = form.save(commit=False)
                 abstract.user = request.user
                 abstract.save()
+                abstract.send_email()
                 context['abstract'] = abstract
 
                 messages.success(request, 'Abstract submitted successfully!')

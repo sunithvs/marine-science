@@ -199,10 +199,7 @@ class PaperAbstract(models.Model):
     def __str__(self):
         return self.title
 
-    def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        super().save(force_insert, force_update, using, update_fields)
+    def send_email(self):
         msg = (f"New Abstract {self.title}, Submitted  by {self.user.full_name} ({self.user.email})"
                f" on the theme {self.theme} use the link to download the file https://marine.cusat.ac.in{self.file.url}")
         threading.Thread(target=send_email, args=(msg, EMAIL_HOST_USER, "New abstract submission")).start()
