@@ -11,18 +11,21 @@ DEBUG = env.bool('DEBUG', default=False)
 # Allowed hosts
 ALLOWED_HOSTS = [
     'marine.cusat.ac.in',
+    'localhost'
 ]
 
 # CSRF settings
 CSRF_TRUSTED_ORIGINS = [
     'https://marine.cusat.ac.in',
     'http://marine.cusat.ac.in',
+    'http://localhost:8002'
 ]
 
 # CORS settings
 CORS_ORIGIN_WHITELIST = [
     'https://marine.cusat.ac.in',
     'http://marine.cusat.ac.in',
+    'http://localhost:8002'
 
 ]
 CORS_ORIGIN_ALLOW_ALL = False
