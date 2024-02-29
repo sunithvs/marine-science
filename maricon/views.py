@@ -196,40 +196,48 @@ class TeamView(AbstractView):
 
     def get_context_data(self, **kwargs):
         context = super(TeamView, self).get_context_data(**kwargs)
-
-        context["advisory"] = [
-            "Prof. (Dr.) P. G. Sankaran, Vice Chancellor, CUSAT",
-            "Dr. M. Ravichandran, Secretary, MoES, New Delhi",
-            "Dr. Shailesh Nayk, Director, NIAS, Bangalore",
-            "Dr. Rasik Ravindra, Chairman, INSA-SCAR, New Delhi",
-            "Dr. Thamban Meloth, Director, NCPOR, Goa",
-            "Prof. (Dr.) N.V. Chalapathi Rao, Director, NCESS, Trivandrum",
-            "Prof. (Dr.) N. C. Pant, Delhi University, New Delhi",
-            "Prof. (Dr.) M. Radhakrishna, IIT-Bombay, Mumbai",
-            "Prof. (Dr.) C.T. Aravindakumar, Vice Chancellor, MG University",
-            "Prof. (Dr.) Bijoy S. Nandan, Vice Chancellor, Kannur University",
-            "Prof. (Dr.) T. Pradeep Kumar, Vice-Chancellor, KUFOS, Kochi",
-            "Prof. (Dr.) Harilal B. Menon, Vice-Chancellor, Goa University",
-            "Prof. (Dr.) Hironori Ando, Niigata University, Japan",
-            "Prof. (Dr.) Satish Kumar, Niigata University",
-            "Prof. (Dr.) Syed Hashsham, Michigan State University, USA",
-            "Prof. (Dr.) PKSM Rahman, Liverpool John Moores University, UK",
-            "Prof. (Dr.) A. P. Pradeepkumar, Director, SESS, University of Kerala",
-            "Prof. (Dr.) S. Suresh Kumar, Dean, KUFOS, Kochi",
-            "Dr.David Jones,CEO, Justoneocean, UK",
-            'Dr. Ajaya Ravindran, NYU, Abu Dhabi',
-            "Dr. GVM Gupta, Director, CMLRE, Kochi",
-            "Dr. M. Habibulla, Director, CIFNET, Koch",
-            'Dr. George Ninan, Director, CIFT, Kochi',
-            'Dr. A. Gopalakrishnan,Director, CMFRI, Kochi',
-            'Dr. Manoj Samuel, Executive Director, CWRDM, Calicut',
-            'Dr. Jyothibabu R., Division Head, NIO-RC, Kochi',
-            'Dr. N.P. Kurian, Vice President, Ocean Society of India'
+        committees = Committee.objects.all().order_by('-size_on_website')
+        context['committee_names'] = committees
+        context['committees'] = [
+            {
+                'committee': committee,
+                'members': CommitteeMember.objects.filter(committee=committee)
+            }
+            for committee in committees
         ]
-        context["local"] = [
-            "Prof.(Dr.) A.A.Mohamed Hatha(Organizing Chairman)",
-            "Prof.(Dr.)Sunil P.S.(Organizing Convenor)",
-            "Dr.Rahul Mohan(Co - convenor)", ]
+        # context["advisory"] = [
+        #     "Prof. (Dr.) P. G. Sankaran, Vice Chancellor, CUSAT",
+        #     "Dr. M. Ravichandran, Secretary, MoES, New Delhi",
+        #     "Dr. Shailesh Nayk, Director, NIAS, Bangalore",
+        #     "Dr. Rasik Ravindra, Chairman, INSA-SCAR, New Delhi",
+        #     "Dr. Thamban Meloth, Director, NCPOR, Goa",
+        #     "Prof. (Dr.) N.V. Chalapathi Rao, Director, NCESS, Trivandrum",
+        #     "Prof. (Dr.) N. C. Pant, Delhi University, New Delhi",
+        #     "Prof. (Dr.) M. Radhakrishna, IIT-Bombay, Mumbai",
+        #     "Prof. (Dr.) C.T. Aravindakumar, Vice Chancellor, MG University",
+        #     "Prof. (Dr.) Bijoy S. Nandan, Vice Chancellor, Kannur University",
+        #     "Prof. (Dr.) T. Pradeep Kumar, Vice-Chancellor, KUFOS, Kochi",
+        #     "Prof. (Dr.) Harilal B. Menon, Vice-Chancellor, Goa University",
+        #     "Prof. (Dr.) Hironori Ando, Niigata University, Japan",
+        #     "Prof. (Dr.) Satish Kumar, Niigata University",
+        #     "Prof. (Dr.) Syed Hashsham, Michigan State University, USA",
+        #     "Prof. (Dr.) PKSM Rahman, Liverpool John Moores University, UK",
+        #     "Prof. (Dr.) A. P. Pradeepkumar, Director, SESS, University of Kerala",
+        #     "Prof. (Dr.) S. Suresh Kumar, Dean, KUFOS, Kochi",
+        #     "Dr.David Jones,CEO, Justoneocean, UK",
+        #     'Dr. Ajaya Ravindran, NYU, Abu Dhabi',
+        #     "Dr. GVM Gupta, Director, CMLRE, Kochi",
+        #     "Dr. M. Habibulla, Director, CIFNET, Koch",
+        #     'Dr. George Ninan, Director, CIFT, Kochi',
+        #     'Dr. A. Gopalakrishnan,Director, CMFRI, Kochi',
+        #     'Dr. Manoj Samuel, Executive Director, CWRDM, Calicut',
+        #     'Dr. Jyothibabu R., Division Head, NIO-RC, Kochi',
+        #     'Dr. N.P. Kurian, Vice President, Ocean Society of India'
+        # ]
+        # context["local"] = [
+        #     "Prof.(Dr.) A.A.Mohamed Hatha(Organizing Chairman)",
+        #     "Prof.(Dr.)Sunil P.S.(Organizing Convenor)",
+        #     "Dr.Rahul Mohan(Co - convenor)", ]
         context["members"] = [
             "Prof. (Dr.) R. Sajeev",
             "Prof. (Dr.) K. Satheeshan",
