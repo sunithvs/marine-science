@@ -56,22 +56,26 @@
             </div>
         </nav>
     </div><!-- End Breadcrumbs -->
+    {% for committee in committees %}
 
     <section id="themes" class="services pt-0">
         <div id="service" class="container" data-aos="fade-up">
             
             <div class="section-header">
-                <span>ADVISORY COMMITTEE</span>
-                <h2>ADVISORY COMMITTEE</h2>
+                <span>{{ committee.committee }}</span>
+                <h2>{{ committee.committee }}</h2>
 
             </div>
 
             <div class="row gy-4">
-                {% for member in advisory %}
+                {% for member in committee.members %}
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
                         <div class="card p-1 text-center" style="background-color: #d0e0ff;">
-                            <img src="../../static/img/speakers/1.jpg" style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;">
-                            <h3>{{ member }}</h3>
+                            <img src="{{ member.image.url }}"
+                                 style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;"
+                                 alt="{{ member.name }}">
+                            <h3 class="text-dark mt-2 p-0 ">{{ member.name }}</h3>
+                            <p class="text-dark m-0">{{ member.position }}</p>
                         </div>
                     </div><!-- End Card Item -->
                 {% endfor %}
@@ -81,27 +85,20 @@
 
         </div>
     </section><!-- End Services Section -->
+    {% endfor %}
     <section id="themes" class="services pt-0">
         <div id="service" class="container" data-aos="fade-up">
 
             <div class="section-header">
-                <span>LOCAL ORGANIZING COMMITTEE</span>
-                <h2>LOCAL ORGANIZING COMMITTEE</h2>
+                <span>LOCAL ORGANIZING Committee  Members</span>
+                <h2>LOCAL ORGANIZING Committee Members</h2>
 
             </div>
 
             <div class="row gy-4 text-center ">
-                {% for member in local %}
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card p-1 text-center ">
-                            <h3>{{ member }}</h3>
-                        </div>
-                    </div><!-- End Card Item -->
-                {% endfor %}
-                <h3>Members</h3>
                 {% for member in members %}
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card p-1 text-center ">
+                        <div class="card p-1 text-center " style="background-color: #d0e0ff;">
                             <h3>{{ member }}</h3>
                         </div>
                     </div><!-- End Card Item -->
