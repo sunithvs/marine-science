@@ -27,7 +27,7 @@
     <link href={% static "assets/vendor/aos/aos.css" %} rel="stylesheet">
 
     <link href={% static 'assets/css/main.css' %} rel="stylesheet">
-
+    <link rel="icon" type="image/x-icon" href="/static/img/logos/favicon.ico">
 </head>
 
 <body>
@@ -60,7 +60,7 @@
 
     <section id="themes" class="services pt-0">
         <div id="service" class="container" data-aos="fade-up">
-            
+
             <div class="section-header">
                 <span>{{ committee.committee }}</span>
                 <h2>{{ committee.committee }}</h2>
@@ -96,9 +96,29 @@
             </div>
 
             <div class="row gy-4 text-center ">
+<<<<<<< HEAD
+                {% for member in local %}
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                        <div class="card p-1 text-center "  style="background-color: #f3ffdb;">
+                            <img src="../../static/img/speakers/1.jpg" style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;">
+                            <h3>{{ member }}</h3>
+                        </div>
+                    </div><!-- End Card Item -->
+                {% endfor %}
+                <div class="section-header" style="background-color: #a8fff9;">
+                    <span>Members</span>
+                    <h2>Members</h2>
+    
+                </div>
+                {% for member in members %}
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
+                        <div class="card p-1 text-center " style="background-color: #f3ffdb;">
+                            <img src="../../static/img/speakers/1.jpg" style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;">
+=======
                 {% for member in members %}
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
                         <div class="card p-1 text-center " style="background-color: #d0e0ff;">
+>>>>>>> fb34552ad35bca44b9d3cc0536feaed6541129a6
                             <h3>{{ member }}</h3>
                         </div>
                     </div><!-- End Card Item -->
