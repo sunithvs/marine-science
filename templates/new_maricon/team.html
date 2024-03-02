@@ -72,7 +72,7 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
                         <div class="card p-1 text-center" style="background-color: #d0e0ff;">
                             <img src="{{ member.image.url }}"
-                                 style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;"
+                                 style="width: 5rem; height: 5rem; align-self: center; border-radius:50%; margin-top: 0.5rem;"
                                  alt="{{ member.name }}">
                             <h3 class="text-dark mt-2 p-0 ">{{ member.name }}</h3>
                             <p class="text-dark m-0">{{ member.position }}</p>
@@ -96,29 +96,9 @@
             </div>
 
             <div class="row gy-4 text-center ">
-<<<<<<< HEAD
-                {% for member in local %}
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card p-1 text-center "  style="background-color: #f3ffdb;">
-                            <img src="../../static/img/speakers/1.jpg" style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;">
-                            <h3>{{ member }}</h3>
-                        </div>
-                    </div><!-- End Card Item -->
-                {% endfor %}
-                <div class="section-header" style="background-color: #a8fff9;">
-                    <span>Members</span>
-                    <h2>Members</h2>
-    
-                </div>
-                {% for member in members %}
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card p-1 text-center " style="background-color: #f3ffdb;">
-                            <img src="../../static/img/speakers/1.jpg" style="width: 5rem; height: 5rem; align-self: center; border-radius: 2rem; margin-top: 0.5rem;">
-=======
                 {% for member in members %}
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50">
                         <div class="card p-1 text-center " style="background-color: #d0e0ff;">
->>>>>>> fb34552ad35bca44b9d3cc0536feaed6541129a6
                             <h3>{{ member }}</h3>
                         </div>
                     </div><!-- End Card Item -->
@@ -128,7 +108,6 @@
 
         </div>
     </section>
-    <
 </main><!-- End #main -->
 {% include "new_maricon/footer.html" %}
 
