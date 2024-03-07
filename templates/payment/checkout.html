@@ -27,10 +27,10 @@
     <link href={% static "assets/vendor/aos/aos.css" %} rel="stylesheet">
 
     <link href={% static 'assets/css/main.css' %} rel="stylesheet">
-    {% if msg %}
+    {% if err %}
         <script>
             window.onload = function () {
-                alert("{{ msg }}");
+                alert("{{ err }}");
             }
         </script>
     {% endif %}
@@ -70,7 +70,7 @@
             <div class="row gy-4 d-flex justify-content-center">
                 <div class="d-flex flex-column justify-content-center col-lg-8 ">
                     {% if err %}
-                        <h5 class="text-danger">{{ msg }}</h5>
+                        <h5 class="text-danger">{{ err }}</h5>
                     {% endif %}
                     <form action="/payment/" accept-charset="UTF-8" method="post">
                         {% csrf_token %}

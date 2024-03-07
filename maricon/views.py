@@ -1,12 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
 # import send email function
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
 from auth_login.forms import SignUpForm
 from auth_login.models import User
+from payment.utils import payment_completed
 from .forms import PaperAbstractForm
 from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, PaperAbstract, Speaker, \
     THEMES
@@ -120,7 +120,7 @@ class OtpView(AbstractView):
             return render(request, self.template_name, context)
 
 
-@login_required(redirect_field_name='/maricon/login/')
+@payment_completed
 def submission_view(request):
     context = {'speakers': Speaker.objects.all(), 'faqs': Faq.objects.all(), 'sponsors': Sponsor.objects.all(),
                'schedule': [

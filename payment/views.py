@@ -14,24 +14,29 @@ amount_dict = {
         'amount': '300',
         'currency': 'USD',
         'late_fee': '350',
+        'name': "Internation Delegate"
     }, 'is': {
         'amount': '150',
         'currency': 'USD',
         'late_fee': '175',
+        'name': "International Student"
     }, 'nd': {
         'amount': '3000',
         'currency': 'INR',
         'late_fee': '3500',
+        'name': "National delegate"
 
     }, 'rs': {
         'amount': '1500',
         'currency': 'INR',
         'late_fee': '1750',
+        'name': "Research Scholars"
     },
     'sp': {
         'amount': '600',
         'currency': 'INR',
         'late_fee': '750',
+        'name': "Student Participants"
     },
 
 }
@@ -63,8 +68,13 @@ class PaymentView(TemplateView):
     template_name = "payment/checkout.html"
 
     def get(self, request, *args, **kwargs):
+        context = {}
         if request.user.is_authenticated:
-            return render(request, self.template_name, {})
+            err = request.GET.get('error')
+            if err:
+                context["err"] = "payment failed please try again after some time"
+
+            return render(request, self.template_name, context)
         else:
             return redirect('/maricon/login/?next=/maricon/payment/')
 
@@ -75,11 +85,11 @@ class PaymentView(TemplateView):
             payment = Payment.objects.create(
                 amount=amount_dict[request.POST['category']]['amount'],
                 currency=amount_dict[request.POST['category']]['currency'],
-                user=request.user
+                user=request.user,
+                category=amount_dict[request.POST['category']]['name'],
             )
-            print("payment", payment)
             consumer_data = {
-                'merchant_id': 'T1002122',
+                'merchant_id': 'L1002122',
                 'txn_id': payment.id,
                 'total_amount': '1',  # TODO: change this to payment.amount
                 'account_no': '',
@@ -101,9 +111,10 @@ class PaymentView(TemplateView):
 
             generated_token = generate_token_from_dict(list(consumer_data.values()), salt)
             print(generated_token)
-            return render(request, "payment/payment.html", {'token': generated_token, 'consumer_data': consumer_data})
+            return render(request, "payment/confirm_payment.html",
+                          {'token': generated_token, 'consumer_data': consumer_data,
+                           "payment": payment})
         else:
-            print("koooooi")
             return redirect('/maricon/login/?next=/maricon/payment/')
 
 
@@ -126,8 +137,7 @@ def payment_verification(request):
         else:
             payment.status = 'failed'
             payment.save()
-        val /= 0
-
+            return redirect('/payment/?error=payment_failed')
         return redirect('/maricon/abstract/')
     else:
         return JsonResponse({'status': 'failure'})

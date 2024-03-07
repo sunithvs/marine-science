@@ -21,6 +21,7 @@ class Payment(models.Model):
     user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, default="pending", choices=(("pending", "pending"), ("success", "success"),
                                                                          ("failed", "failed")))
+    category = models.CharField(max_length=100, default="")
 
     def __str__(self):
         return self.id
