@@ -30,6 +30,7 @@ urlpatterns = [
     path(
         "maricon/",
         include("maricon.urls")),
+    path("payment/", include("payment.urls")),
     path(
         settings.ADMIN_URL,
         admin.site.urls),

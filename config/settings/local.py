@@ -48,10 +48,11 @@ ALLOWED_HOSTS += ["*"]
 
 # Additional trusted CSRF origins
 CSRF_TRUSTED_ORIGINS += [
-    "http://localhost:8000",
+    "http://localhost:8000", 'https://www.tpsl-india.in'
 ]
 
 # Additional CORS origins whitelist
 CORS_ORIGIN_WHITELIST += [
     "http://localhost:8000",
+    'https://www.tpsl-india.in'
 ]

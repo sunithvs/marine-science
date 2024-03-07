@@ -6,7 +6,7 @@ Base Settings for Django Project
 from pathlib import Path
 
 import environ
-import os
+
 env = environ.Env()
 
 environ.Env.read_env('.env')
@@ -46,6 +46,8 @@ EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", default="")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 
+PAYMENT_KEY = env.str("PAYMENT_KEY", default="")
+
 # Installed apps
 INSTALLED_APPS = [
     'jazzmin',
@@ -68,6 +70,7 @@ CUSTOM_APPS = [
     "auth_login",
     'home',
     'maricon',
+    'payment',
 ]
 
 INSTALLED_APPS += CUSTOM_APPS + THIRD_PARTY_APPS
