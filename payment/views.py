@@ -91,7 +91,7 @@ class PaymentView(TemplateView):
             consumer_data = {
                 'merchant_id': 'L1002122',
                 'txn_id': payment.id,
-                'total_amount': '1',  # TODO: change this to payment.amount
+                'total_amount': amount_dict[request.POST['category']]['amount'],
                 'account_no': '',
                 'consumer_id': '',
                 'consumer_mobile_no': '',
@@ -105,6 +105,7 @@ class PaymentView(TemplateView):
                 'exp_month': '',
                 'exp_year': '',
                 'cvv_code': '',
+                'currency':amount_dict[request.POST['category']]['currency']
             }
 
             salt = PAYMENT_KEY
