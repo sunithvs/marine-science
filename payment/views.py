@@ -105,7 +105,6 @@ class PaymentView(TemplateView):
                 'exp_month': '',
                 'exp_year': '',
                 'cvv_code': '',
-                'currency':amount_dict[request.POST['category']]['currency']
             }
 
             salt = PAYMENT_KEY
@@ -114,7 +113,7 @@ class PaymentView(TemplateView):
             print(generated_token)
             return render(request, "payment/confirm_payment.html",
                           {'token': generated_token, 'consumer_data': consumer_data,
-                           "payment": payment})
+                           "payment": payment, "currency": amount_dict[request.POST['category']]['currency']})
         else:
             return redirect('/maricon/login/?next=/maricon/payment/')
 
