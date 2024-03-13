@@ -57,4 +57,4 @@ class Payment(models.Model):
     def send_email(self):
         threading.Thread(target=send_email, args=(
             "You have been successfully registered for the participation of MARICON-2024", self.user.email,
-            "Maricon abstract submission")).start()
+            "Maricon Registration")).start()
