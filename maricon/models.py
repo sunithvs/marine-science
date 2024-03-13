@@ -187,10 +187,10 @@ class OTP(models.Model):
 
 class PaperAbstract(models.Model):
     user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE,blank=True,null=True)
-    title = models.CharField(max_length=100)
-    authors = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
+    authors = models.CharField(max_length=500)
     abstract = models.TextField(blank=True, null=True)
-    keywords = models.CharField(max_length=100)
+    keywords = models.CharField(max_length=500)
     file = models.FileField(upload_to='abstracts', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

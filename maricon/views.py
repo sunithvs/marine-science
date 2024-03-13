@@ -150,8 +150,11 @@ def submission_view(request):
                    },
                ], 'gallery': Gallery.objects.all(),
                "themes": THEMES,
-               "abstract": PaperAbstract.objects.filter(user=request.user).first()
+               "abstract": PaperAbstract.objects.filter(user=request.user).first(),
+
                }
+    if request.GET.get('payment')=="success":
+        context['payment'] = "Payment completed successful please submit your abstract"
     committees = Committee.objects.only('name').order_by('-size_on_website')
     context['committees'] = committees
     if request.user.is_authenticated:

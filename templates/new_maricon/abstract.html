@@ -68,6 +68,9 @@
         <div class="container">
             <div class="row gy-4 d-flex justify-content-center">
                 <div id="featured-services" class="d-flex flex-column justify-content-center col-lg-8 ">
+                {% if  payment %}
+                    <h4 class="text-primary">{{ payment }}</h4>
+                {% endif %}
                     {% if abstract %}
                         <div class="col-lg-12 service-item d-flex text-dark" data-aos="fade-up">
                             <div>

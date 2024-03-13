@@ -148,7 +148,7 @@ def payment_verification(request):
             payment.status = 'failed'
             payment.save()
             return redirect('/payment/?error=payment_failed')
-        return redirect('/maricon/abstract/')
+        return redirect('/maricon/abstract/?payment=success')
     else:
         logger.error("payment verification failed {}".format(txn_id))
         return JsonResponse({'status': 'failure'})
