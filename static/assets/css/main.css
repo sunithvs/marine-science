@@ -332,7 +332,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0 10px 30px;
+    padding: 5px 0 5px 10px;
     font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 400;
