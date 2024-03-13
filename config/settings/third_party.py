@@ -199,6 +199,10 @@ LOGGING = {
             'backupCount': 5,
             'formatter': 'standard',
         },
+        'db_log': {
+            'level': 'DEBUG',
+            'class': 'django_db_logger.db_log_handler.DatabaseLogHandler'
+        },
 
     },
     'formatters': {
@@ -224,9 +228,17 @@ LOGGING = {
             'propagate': False,
         },
         'django.request': {
-            'handlers': ['request_handler'],
-            'level': 'DEBUG',
+            'handlers': ['db_log'],
+            'level': 'ERROR',
             'propagate': False
         },
+        'db': {
+            'handlers': ['db_log'],
+            'level': 'DEBUG'
+        }, 'payment': {
+            'handlers': ['db_log'],
+            'level': 'INFO'
+        },
+
     }
 }
