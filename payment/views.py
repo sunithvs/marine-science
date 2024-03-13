@@ -152,6 +152,7 @@ def payment_verification(request):
             logger.debug("payment verified and got success {}".format(txn_id))
             payment.status = 'success'
             payment.save()
+            payment.send_email()
             sendmail(
                 f"Dear sir, "
                 f"You have been successfully registered for the participation of MARICON-2024.",payment.user.email,"Maricon Registration Fee Payment"
