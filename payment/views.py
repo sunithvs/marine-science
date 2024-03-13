@@ -14,7 +14,6 @@ from maricon.models import send_email
 from .models import Payment
 
 
-
 logger = logging.getLogger("payment")
 amount_dict = {
     'id': {
