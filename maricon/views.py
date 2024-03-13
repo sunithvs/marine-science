@@ -6,7 +6,6 @@ from django.contrib.auth import login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from base.utils import  sendmail
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from base.utils import sendmail
@@ -180,13 +179,10 @@ def submission_view(request):
                 messages.success(request, 'Abstract submitted successfully!')
                 return render(request, 'new_maricon/abstract.html', context)
             else:
+                context['form'] = form
                 messages.error(request, 'Error submitting the abstract. Please check the form.')
                 logger.debug(form.errors.as_data())
-                sendmail(
-                    f"Dear sir, "
-                    f"Your abstract has failed, please try again or contact the team is issue persists"
-                    "With Regards \n Maricon", request.user.email, "Maricon abstract submission"
-                )
+                render(request, 'new_maricon/abstract.html', context)
 
         else:
             form = PaperAbstractForm()
