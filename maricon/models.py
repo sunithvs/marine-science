@@ -204,3 +204,4 @@ class PaperAbstract(models.Model):
         msg = (f"New Abstract {self.title}, Submitted  by {self.user.full_name} ({self.user.email})"
                f" on the theme {self.theme} use the link to download the file https://marine.cusat.ac.in{self.file.url}")
         threading.Thread(target=send_email, args=(msg, EMAIL_HOST_USER, "New abstract submission")).start()
+        threading.Thread(target=send_email, args=("You have been successfully registered for the participation of MARICON-2024", self.user.email, "Maricon abstract submission")).start()
