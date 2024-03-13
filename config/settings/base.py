@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = [
     'drf_yasg',
     'ckeditor',
+    "django_db_logger",
 ]
 
 # Custom apps

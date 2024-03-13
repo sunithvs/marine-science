@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import login
 # import send email function
@@ -11,6 +13,7 @@ from .forms import PaperAbstractForm
 from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, PaperAbstract, Speaker, \
     THEMES
 
+logger = logging.getLogger("db")
 
 class AbstractView(TemplateView):
 
@@ -71,12 +74,16 @@ class RegisterView(AbstractView):
         return context
 
     def post(self, request):
+
         if request.method == 'POST':
             # Assuming you have a custom User model, adjust the form accordingly
             form = SignUpForm(request.POST)
+            logger.debug("user trying to register")
+            logger.debug(f"request.post = {request.POST}")
 
             if form.is_valid():
                 # Create a new user with the extended information
+                logger.debug("form valid")
                 user = form.save(commit=False)
                 user.full_name = form.cleaned_data['full_name']
                 user.gender = form.cleaned_data['gender']
@@ -87,10 +94,11 @@ class RegisterView(AbstractView):
                 OTP.objects.create(user=user).send_email()
                 context['otp'] = True
                 context['email'] = user.email
-                print("KKKKKKKKKKKKKKKKKKKKKKKK")
+                logger.debug("email sent")
                 return render(request, 'new_maricon/signup.html', context)
             else:
-                print(form.errors.as_data())
+                logger.debug("form invalid errors")
+                logger.debug(form.errors.as_data())
                 messages.error(request, 'Error creating the account. Please check the form.')
 
         return render(request, 'new_maricon/signup.html', self.get_context_data())
@@ -102,16 +110,20 @@ class OtpView(AbstractView):
     def post(self, request):
         email = request.POST.get('email')
         otp = request.POST.get('otp')
-        print(email, otp)
+        logger.debug(f"otp received {email=} {otp=}")
         if not email or not otp:
+            logger.error(f"no otp or email provided {email=} {otp=}")
             return redirect('maricon:login')
         email = email.lower().strip()
         otp = otp.strip()
+        logger.debug("get email and otp")
         otp_obj = OTP.objects.filter(user__email=email, otp=otp)
         if otp_obj.exists() and otp_obj.first().is_valid():
+            logger.debug(f"otp is valid login user {otp_obj.first().user}")
             login(request, otp_obj.first().user)
             return redirect('submission')
         else:
+            logger.debug("invalid otp err sent")
             context = self.get_context_data()
             context['err'] = True
             context['msg'] = "Invalid OTP"
@@ -144,21 +156,25 @@ def submission_view(request):
     context['committees'] = committees
     if request.user.is_authenticated:
         if request.method == 'POST':
+            logger.debug("user trying to submit the abstract")
             form = PaperAbstractForm(request.POST, request.FILES)
-            print(request.FILES)
+            logger.debug(request.FILES)
             if form.is_valid():
                 # Save the abstract to the database
+                logger.debug("valid abstract details")
                 abstract = form.save(commit=False)
                 abstract.user = request.user
                 abstract.save()
+                logger.debug("abstract submitted successfully")
                 abstract.send_email()
+                logger.debug("email sent to admin")
                 context['abstract'] = abstract
 
                 messages.success(request, 'Abstract submitted successfully!')
                 return render(request, 'new_maricon/abstract.html', context)
             else:
                 messages.error(request, 'Error submitting the abstract. Please check the form.')
-                print(form.errors.as_data())
+                logger.debug(form.errors.as_data())
 
         else:
             form = PaperAbstractForm()
