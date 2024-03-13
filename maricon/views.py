@@ -6,8 +6,10 @@ from django.contrib.auth import login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from base.utils import  sendmail
 from auth_login.forms import SignUpForm
 from auth_login.models import User
+from base.utils import sendmail
 from payment.utils import payment_completed
 from .forms import PaperAbstractForm
 from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee, OTP, PaperAbstract, Speaker, \
@@ -172,12 +174,19 @@ def submission_view(request):
                 abstract.send_email()
                 logger.debug("email sent to admin")
                 context['abstract'] = abstract
-
+                sendmail(
+                    f"Dear sir, You have been successfully submitted the abstract for the presentation in MARICON-2024” ", request.user.email, "Maricon abstract submission"
+                )
                 messages.success(request, 'Abstract submitted successfully!')
                 return render(request, 'new_maricon/abstract.html', context)
             else:
                 messages.error(request, 'Error submitting the abstract. Please check the form.')
                 logger.debug(form.errors.as_data())
+                sendmail(
+                    f"Dear sir, "
+                    f"Your abstract has failed, please try again or contact the team is issue persists"
+                    "With Regards \n Maricon", request.user.email, "Maricon abstract submission"
+                )
 
         else:
             form = PaperAbstractForm()
