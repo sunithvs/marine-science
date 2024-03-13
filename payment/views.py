@@ -37,7 +37,13 @@ amount_dict = {
         'currency': 'INR',
         'late_fee': '750',
         'name': "Student Participants"
+    },'in': {
+        'amount': '1',
+        'currency': 'INR',
+        'late_fee': '1',
+        'name': "Invalid option for testing"
     },
+
 
 }
 
