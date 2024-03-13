@@ -186,7 +186,7 @@ class OTP(models.Model):
 
 
 class PaperAbstract(models.Model):
-    user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE,blank=True,null=True)
+    user = models.ForeignKey('auth_login.User', on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=500)
     authors = models.CharField(max_length=500)
     abstract = models.TextField(blank=True, null=True)
@@ -194,7 +194,8 @@ class PaperAbstract(models.Model):
     file = models.FileField(upload_to='abstracts', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    theme = models.CharField(max_length=100, choices=[(i, i) for i in THEMES],default=THEMES[0])
+    theme = models.CharField(max_length=100, choices=[(i, i) for i in THEMES], default=THEMES[0])
+    presentation = models.CharField(max_length=100, choices=(("oral", 'oral'), ('poster', 'poster')),default='oral')
 
     def __str__(self):
         return self.title

@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
+from base.utils import  sendmail
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from base.utils import sendmail
@@ -174,9 +175,7 @@ def submission_view(request):
                 logger.debug("email sent to admin")
                 context['abstract'] = abstract
                 sendmail(
-                    f"Dear sir, "
-                    f"Your abstract  has successfully submitted. Thankyou for submitting the abstract"
-                    "With Regards \n Maricon", request.user.email, "Maricon abstract submission"
+                    f"Dear sir, You have been successfully submitted the abstract for the presentation in MARICON-2024” ", request.user.email, "Maricon abstract submission"
                 )
                 messages.success(request, 'Abstract submitted successfully!')
                 return render(request, 'new_maricon/abstract.html', context)

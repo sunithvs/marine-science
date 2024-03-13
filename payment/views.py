@@ -150,17 +150,16 @@ def payment_verification(request):
             payment.save()
             sendmail(
                 f"Dear sir, "
-                f"Your payment has successfully processed the with transaction id: {txn_id} and  amount {payment.amount}. Please submit your abstract to complete the registration process"
-                "With Regards \n Maricon",payment.user.email,"Maricon Registration Fee Payment"
+                f"You have been successfully registered for the participation of MARICON-2024.",payment.user.email,"Maricon Registration Fee Payment"
             )
         else:
             logger.error("payment verified and got failed {}".format(txn_id))
             payment.status = 'failed'
             payment.save()
-            sendmail(
-                f"Dear sir, "
-                f"Your payment has failed and transaction id  is {txn_id} please retry  the payment or contact the team to complete the registration process"
-                "with Regards \n Maricon",payment.user.email,"Maricon Registration Fee")
+            # sendmail(
+            #     f"Dear sir, "
+            #     f"Your payment has failed and transaction id  is {txn_id} please retry  the payment or contact the team to complete the registration process"
+            #     "with Regards \n Maricon",payment.user.email,"Maricon Registration Fee")
 
             return redirect('/payment/?error=payment_failed')
         return redirect('/maricon/abstract/?payment=success')
