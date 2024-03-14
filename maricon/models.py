@@ -31,7 +31,8 @@ THEMES = [" Oceans and Climate change",
           'Fisheries for Food Security and Sustainable Livelihoods',
           'Marine Policies and Regulations',
           'Societal Applications of Marine-Geosciences',
-          'Polar Sciences']
+          'Polar Sciences',
+          'Marine Pollution and Ecotoxicology']
 
 
 def send_email(message, receiver, subject="Maricon Registration/Login verification"):
