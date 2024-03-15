@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
-from base.utils import  sendmail
+from base.utils import sendmail
 from auth_login.forms import SignUpForm
 from auth_login.models import User
 from base.utils import sendmail
@@ -16,6 +16,7 @@ from .models import Faq, Sponsor, Schedule, Gallery, CommitteeMember, Committee,
     THEMES
 
 logger = logging.getLogger("db")
+
 
 class AbstractView(TemplateView):
 
@@ -101,8 +102,11 @@ class RegisterView(AbstractView):
             else:
                 logger.debug("form invalid errors")
                 logger.debug(form.errors.as_data())
-                messages.error(request, 'Error creating the account. Please check the form.')
+                context = self.get_context_data()
+                context['form'] = form
+                messages.error(request, 'Error creating the account. Please check the form.', context)
 
+                return render(request, 'new_maricon/signup.html', context)
         return render(request, 'new_maricon/signup.html', self.get_context_data())
 
 
@@ -155,7 +159,7 @@ def submission_view(request):
                "abstract": PaperAbstract.objects.filter(user=request.user).first(),
 
                }
-    if request.GET.get('payment')=="success":
+    if request.GET.get('payment') == "success":
         context['payment'] = "Payment completed successful please submit your abstract"
     committees = Committee.objects.only('name').order_by('-size_on_website')
     context['committees'] = committees
@@ -175,7 +179,8 @@ def submission_view(request):
                 logger.debug("email sent to admin")
                 context['abstract'] = abstract
                 sendmail(
-                    f"Dear sir, You have been successfully submitted the abstract for the presentation in MARICON-2024” ", request.user.email, "Maricon abstract submission"
+                    f"Dear sir, You have been successfully submitted the abstract for the presentation in MARICON-2024” ",
+                    request.user.email, "Maricon abstract submission"
                 )
                 messages.success(request, 'Abstract submitted successfully!')
                 return render(request, 'new_maricon/abstract.html', context)
@@ -305,8 +310,10 @@ class TeamView(AbstractView):
 class PrivacyPolicyView(AbstractView):
     template_name = 'new_maricon/privacy.html'
 
+
 class TermsView(AbstractView):
     template_name = 'new_maricon/terms.html'
+
 
 class RefundView(AbstractView):
     template_name = 'new_maricon/refund.html'
