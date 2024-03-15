@@ -101,7 +101,9 @@ class RegisterView(AbstractView):
                 logger.debug("form invalid errors")
                 logger.debug(form.errors.as_data())
                 messages.error(request, 'Error creating the account. Please check the form.')
-
+                context = self.get_context_data()
+                context['form'] = form
+                return render(request, 'new_maricon/signup.html', context)
         return render(request, 'new_maricon/signup.html', self.get_context_data())
 
 
