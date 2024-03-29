@@ -28,7 +28,7 @@ class OTPAdmin(admin.ModelAdmin):
 
 @admin.register(PaperAbstract)
 class PaperAbstractAdmin(admin.ModelAdmin):
-    list_display = ('title', 'authors', 'created_at','presentation')
+    list_display = ('title', 'authors', 'created_at','presentation', 'file')
     search_fields = ('title', 'authors')
     list_filter = ('created_at', 'theme','presentation')
     actions = ['export_as_csv','download_as_zip']
