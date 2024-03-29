@@ -62,6 +62,8 @@ class PaperAbstractAdmin(admin.ModelAdmin):
         # Create a ZIP file in memory
         with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED, False) as zip_file:
             for obj in queryset:
+                if not obj.file:
+                    continue
                 file_path = obj.file.path
                 file_name = os.path.basename(file_path)
                 # Make sure the file exists before adding it
