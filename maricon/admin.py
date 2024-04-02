@@ -45,11 +45,14 @@ class PaperAbstractAdmin(admin.ModelAdmin):
             response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
             writer = csv.writer(response)
 
-            writer.writerow(field_names)
+            writer.writerow(field_names+['registered user name', 'email', 'contact'])
             for obj in queryset:
-                 writer.writerow([getattr(obj, field) for field in field_names])
+                 writer.writerow([getattr(obj, field) for field in field_names]
+                                 + [obj.user.full_name if obj.user else "", obj.user.email if obj.user else "",
+                                    obj.user.mobile_number if obj.user else ""])
             return response
         except Exception as e:
+            print(e)
             messages.error(request, "Error in exporting CSV")
 
     def download_as_zip(self, request, queryset):
