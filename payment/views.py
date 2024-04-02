@@ -71,7 +71,7 @@ def generate_token_from_dict(consumer_data, salt):
 
 
 class PaymentView(TemplateView):
-    template_name = "payment/checkout.html"
+    template_name = "payment/registration_closed.html"
 
     def get(self, request, *args, **kwargs):
         context = {}
@@ -85,45 +85,45 @@ class PaymentView(TemplateView):
         else:
             return redirect('/maricon/login/?next=/maricon/payment/')
 
-    def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            print("authenticated", request.POST['category'], amount_dict[request.POST['category']]['amount'])
-            logger.debug(f"payment creation request {request.POST['category'] = } {amount_dict[request.POST['category']]['amount'] =}")
-            payment = Payment.objects.create(
-                amount=amount_dict[request.POST['category']]['amount'],
-                currency=amount_dict[request.POST['category']]['currency'],
-                user=request.user,
-                category=amount_dict[request.POST['category']]['name'],
-            )
-            consumer_data = {
-                'merchant_id': 'L1002122',
-                'txn_id': payment.id,
-                'total_amount': amount_dict[request.POST['category']]['amount'],
-                'account_no': '',
-                'consumer_id': '',
-                'consumer_mobile_no': '',
-                'consumer_email_id':'',
-                'debit_start_date': '',
-                'debit_end_date': '',
-                'max_amount': '',
-                'amount_type': '',
-                'frequency': '',
-                'card_number': '',
-                'exp_month': '',
-                'exp_year': '',
-                'cvv_code': '',
-            }
-            logger.info(f"{consumer_data = }")
-
-            salt = PAYMENT_KEY
-
-            generated_token = generate_token_from_dict(list(consumer_data.values()), salt)
-            logger.info(f"{generated_token=}")
-            return render(request, "payment/confirm_payment.html",
-                          {'token': generated_token, 'consumer_data': consumer_data,
-                           "payment": payment, "currency": amount_dict[request.POST['category']]['currency']})
-        else:
-            return redirect('/maricon/login/?next=/maricon/payment/')
+    # def post(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         print("authenticated", request.POST['category'], amount_dict[request.POST['category']]['amount'])
+    #         logger.debug(f"payment creation request {request.POST['category'] = } {amount_dict[request.POST['category']]['amount'] =}")
+    #         payment = Payment.objects.create(
+    #             amount=amount_dict[request.POST['category']]['amount'],
+    #             currency=amount_dict[request.POST['category']]['currency'],
+    #             user=request.user,
+    #             category=amount_dict[request.POST['category']]['name'],
+    #         )
+    #         consumer_data = {
+    #             'merchant_id': 'L1002122',
+    #             'txn_id': payment.id,
+    #             'total_amount': amount_dict[request.POST['category']]['amount'],
+    #             'account_no': '',
+    #             'consumer_id': '',
+    #             'consumer_mobile_no': '',
+    #             'consumer_email_id':'',
+    #             'debit_start_date': '',
+    #             'debit_end_date': '',
+    #             'max_amount': '',
+    #             'amount_type': '',
+    #             'frequency': '',
+    #             'card_number': '',
+    #             'exp_month': '',
+    #             'exp_year': '',
+    #             'cvv_code': '',
+    #         }
+    #         logger.info(f"{consumer_data = }")
+    #
+    #         salt = PAYMENT_KEY
+    #
+    #         generated_token = generate_token_from_dict(list(consumer_data.values()), salt)
+    #         logger.info(f"{generated_token=}")
+    #         return render(request, "payment/confirm_payment.html",
+    #                       {'token': generated_token, 'consumer_data': consumer_data,
+    #                        "payment": payment, "currency": amount_dict[request.POST['category']]['currency']})
+    #     else:
+    #         return redirect('/maricon/login/?next=/maricon/payment/')
 
 
 @csrf_exempt
