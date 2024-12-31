@@ -1,66 +1,151 @@
-#  Internship Task Django
+# Marine Science Conference Management System
 
-## Introduction
+A Django-based web application for managing marine science conference registrations, abstract submissions, and payments. The system provides a complete solution for conference organization, including user authentication, payment processing, and content management.
 
-Welcome to the project README! This document provides an overview of the various modules and components present in your Django project.
+## Features
 
-## auth_login
+- User registration and authentication system
+- Abstract submission and management
+- Payment integration for conference registration
+- Admin dashboard for managing submissions
+- Responsive design with multiple template themes
+- Docker containerization for easy deployment
+- Nginx configuration for production deployment
+- Multi-environment support (development and production)
 
-The `auth_login` app handles user authentication, registration, and user profile management.
+## Tech Stack
 
-### Modules
+- Django
+- PostgreSQL (configured via Docker)
+- Nginx
+- Docker & Docker Compose
+- Bootstrap
+- jQuery
+- Various frontend libraries (AOS, Swiper, GLightbox, etc.)
 
-- **models.py**: Defines custom user models with additional fields like mobile number, profile image, and more.
+## Project Structure
 
-- **views.py**: Contains views for user authentication, profile management, login via Google OAuth2, email and password login, user registration, and more.
+```
+sunithvs-marine-science/
+├── apps/
+│   ├── auth_login/      # Authentication & user management
+│   ├── base/            # Core functionality & utilities
+│   ├── payment/         # Payment processing
+│   ├── maricon/         # Conference management
+│   └── home/           # Main website content
+├── config/             # Project configuration
+│   └── settings/       # Environment-specific settings
+├── templates/          # HTML templates
+├── static/             # Static files (CSS, JS, images)
+├── nginx/             # Nginx configuration
+└── scripts/           # Utility scripts
+```
 
-- **serializers.py**: Provides serializers for user data, login credentials, and registration data.
+## Prerequisites
 
-- **urls.py**: Defines URLs for user authentication, login, registration, profile management, and more.
-
-## base
-
-The `base` app includes base models, utility classes, and custom permissions.
-
-### Modules
-
-- **models.py**: Contains an abstract base model with timestamp fields, active status, and soft delete functionality.
-
-- **permissions.py**: Defines custom permissions like `IsOwner`, `IsVerified`, `IsNotVerified`, and `IsOwnObj` for controlling access based on ownership and verification status.
+- Docker and Docker Compose
+- Python 3.x (for local development)
+- Git
 
 ## Installation
 
-To get started with the project, follow these steps:
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd sunithvs-marine-science
+```
 
-1. Clone the repository to your local machine.
-2. Set up a virtual environment for the project
-   - On Windows: `python -m venv venv`
-   - On macOS and Linux: `python3 -m venv venv`
-4. Activate the virtual environment:
-   - On Windows: `venv\Scripts\activate`
-   - On macOS and Linux: `source venv/bin/activate`
-5. Install project dependencies using `pip install -r requirements.txt`.
-6. Run makemigrations using `python manage.py makemigrations`.
-7. Run migrations using `python manage.py migrate`.
-8. Create a superuser account using `python manage.py createsuperuser`.
+2. Create environment file:
+```bash
+cp env.example .env
+```
+Edit `.env` with your configuration values.
 
-## Usage
+3. Build and start the containers:
 
-- The `auth_login` app provides user authentication, login, registration, and profile management views.
-- Use the custom permissions defined in the `base` app to control access to various API endpoints.
-- Customize the models, serializers, and views to fit your project's requirements.
+For development:
+```bash
+docker-compose up --build
+```
 
-## Running with Docker
+For production:
+```bash
+docker-compose -f docker-compose-prod.yml up --build
+```
 
-You can also run the project using Docker for easy setup and management. Follow these steps:
+## Development Setup
 
-1. Make sure you have Docker installed on your system.
-2. Clone the repository to your local machine.
-3. Open a terminal and navigate to the project directory.
-4. copy the `.env.example` file to `.env` and fill in the required values.
-5. Build the Docker image: `docker compose build .`
-6. Run the Docker container: `docker compose up `
-7. Access the project at `http://localhost:8000/`.
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-Remember to replace `project-name` with your actual project's name.
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
+3. Run migrations:
+```bash
+python manage.py migrate
+```
+
+4. Create superuser:
+```bash
+python manage.py createsuperuser
+```
+
+5. Run the development server:
+```bash
+python manage.py runserver
+```
+
+## Docker Deployment
+
+The project includes two Docker Compose configurations:
+
+- `docker-compose.yml`: Development environment
+- `docker-compose-prod.yml`: Production environment with Nginx
+
+### Production Deployment
+
+1. Configure your environment variables in `.env`
+2. Build and start the production containers:
+```bash
+docker-compose -f docker-compose-prod.yml up --build -d
+```
+
+## Available Commands
+
+- Run linting:
+```bash
+python manage.py lint
+```
+
+- Collect static files:
+```bash
+python manage.py collectstatic
+```
+
+## Project Components
+
+### Templates
+- `new_maricon/`: New conference theme templates
+- `maricon/`: Original conference templates
+- `home/`: Main website templates
+- `payment/`: Payment processing templates
+
+### Static Files
+- Vendor libraries in `static/assets/vendor/`
+- Custom styles in `static/css/`
+- JavaScript files in `static/js/`
+- Conference documents in `static/doc/`
+
+## Security
+
+- Configure `settings/prod.py` for production deployment
+- Update `SECRET_KEY` in environment variables
+- Set up proper SSL/TLS in Nginx configuration
+- Configure proper database credentials
+- Set up backup systems for the database
